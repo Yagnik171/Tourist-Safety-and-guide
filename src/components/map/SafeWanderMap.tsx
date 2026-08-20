@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import type { Location, IncidentReport, EmergencyContact, Route } from '@/types';
-import { Shield, AlertTriangle, Hospital, Phone, Navigation, MapPin } from 'lucide-react';
+import { Shield, Phone, Navigation, MapPin } from 'lucide-react';
 import { getRiskColor, getRiskLevel } from '@/lib/services/safety-score';
+import { useMap } from 'react-leaflet';
 
 interface SafeWanderMapProps {
   center?: [number, number];
@@ -45,6 +46,36 @@ const Polyline = dynamic(
   { ssr: false }
 );
 
+// Map bounds controller to automatically fit and center route/markers
+function MapController({
+  center,
+  zoom,
+  activeRoute,
+  L,
+}: {
+  center: [number, number];
+  zoom: number;
+  activeRoute?: Route | null;
+  L: any;
+}) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map || !L) return;
+
+    if (activeRoute && activeRoute.points.length > 1) {
+      // Fit bounds to entire route
+      const latLngs = activeRoute.points.map((p) => [p.lat, p.lng]);
+      const bounds = L.latLngBounds(latLngs);
+      map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+    } else if (center) {
+      map.setView(center, zoom);
+    }
+  }, [map, L, activeRoute, center, zoom]);
+
+  return null;
+}
+
 export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
   center = [13.0827, 80.2707],
   zoom = 12,
@@ -58,7 +89,7 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
   showSafetyZones = true,
 }) => {
   const [mounted, setMounted] = useState(false);
-  const [L, setL] = useState<typeof import('leaflet') | null>(null);
+  const [L, setL] = useState<any>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -76,8 +107,50 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
     );
   }
 
-  // Create custom Leaflet HTML DivIcons
-  const createLocationIcon = (score: number = 75) => {
+  // Custom Pin Icons
+  const createStartPin = () =>
+    L.divIcon({
+      className: 'start-pin',
+      html: `<div style="
+        background: #10b981;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 900;
+        font-size: 14px;
+      ">A</div>`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+    });
+
+  const createEndPin = () =>
+    L.divIcon({
+      className: 'end-pin',
+      html: `<div style="
+        background: #ef4444;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 900;
+        font-size: 14px;
+      ">B</div>`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+    });
+
+  const createLocationIcon = (score = 75) => {
     const risk = getRiskLevel(score);
     const color = getRiskColor(risk);
     return L.divIcon({
@@ -145,21 +218,26 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
     });
   };
 
+  const routeStartPoint = activeRoute && activeRoute.points.length > 0 ? activeRoute.points[0] : null;
+  const routeEndPoint = activeRoute && activeRoute.points.length > 1 ? activeRoute.points[activeRoute.points.length - 1] : null;
+
   return (
     <div className={`relative overflow-hidden rounded-2xl border border-slate-800 ${className}`}>
       <MapContainer
         center={center}
         zoom={zoom}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
         className="w-full h-full"
       >
-        {/* Dark-themed OpenStreetMap CartoDB Tiles */}
+        <MapController center={center} zoom={zoom} activeRoute={activeRoute} L={L} />
+
+        {/* CartoDB Tiles */}
         <TileLayer
           attribution='&copy; <a href="https://carto.com/">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
 
-        {/* Safety Zones (Heat circles) */}
+        {/* Safety Zones */}
         {showSafetyZones &&
           locations.map((loc) => {
             const mockScore = loc.city === 'Chennai' ? 72 : loc.city === 'Bengaluru' ? 78 : 65;
@@ -210,7 +288,7 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
             );
           })}
 
-        {/* Verified & Pending Incidents Markers */}
+        {/* Incidents Markers */}
         {incidents.map((inc) => {
           if (!inc.latitude || !inc.longitude) return null;
           return (
@@ -257,31 +335,63 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
                     <Phone className="w-3 h-3" /> {contact.phone}
                   </div>
                   <p className="text-xs text-slate-300">{contact.address}</p>
-                  <a
-                    href={`tel:${contact.phone}`}
-                    className="block text-center mt-2 py-1 px-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-xs font-semibold"
-                  >
-                    Call Immediately
-                  </a>
                 </div>
               </Popup>
             </Marker>
           );
         })}
 
+        {/* Active Route Origin and Destination Markers */}
+        {routeStartPoint && (
+          <Marker position={[routeStartPoint.lat, routeStartPoint.lng]} icon={createStartPin()}>
+            <Popup>
+              <div className="p-1 font-bold text-xs text-emerald-400">
+                🚩 Origin / Starting Point
+              </div>
+            </Popup>
+          </Marker>
+        )}
+
+        {routeEndPoint && (
+          <Marker position={[routeEndPoint.lat, routeEndPoint.lng]} icon={createEndPin()}>
+            <Popup>
+              <div className="p-1 font-bold text-xs text-rose-400">
+                🏁 Destination Point
+              </div>
+            </Popup>
+          </Marker>
+        )}
+
         {/* Active Route Polyline */}
         {activeRoute && activeRoute.points.length > 1 && (
           <Polyline
             positions={activeRoute.points.map((p) => [p.lat, p.lng])}
             pathOptions={{
-              color: activeRoute.safety_score >= 75 ? '#10b981' : '#f59e0b',
-              weight: 5,
-              opacity: 0.85,
+              color: activeRoute.safety_score >= 70 ? '#10b981' : '#f59e0b',
+              weight: 6,
+              opacity: 0.9,
               dashArray: activeRoute.name.includes('Safest') ? undefined : '6, 8',
             }}
           />
         )}
       </MapContainer>
+
+      {/* Floating Route Info Overlay if active */}
+      {activeRoute && (
+        <div className="absolute top-3 left-3 z-[1000] bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl p-3.5 shadow-2xl text-xs space-y-1 text-slate-300 max-w-xs">
+          <div className="font-bold text-white flex items-center gap-1.5">
+            <Navigation className="w-4 h-4 text-cyan-400" />
+            <span className="truncate">{activeRoute.name}</span>
+          </div>
+          <div className="flex items-center justify-between text-[11px] pt-1">
+            <span>Distance: <strong className="text-white">{activeRoute.distance_km} km</strong></span>
+            <span>Est: <strong className="text-white">~{activeRoute.duration_minutes} mins</strong></span>
+          </div>
+          <div className="text-[10px] text-emerald-400 font-semibold pt-0.5">
+            ✓ Auto-scaled map to route corridor
+          </div>
+        </div>
+      )}
 
       {/* Floating Map Legend */}
       <div className="absolute bottom-3 left-3 z-[1000] bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-2.5 text-[11px] space-y-1.5 shadow-xl text-slate-300">
@@ -290,15 +400,11 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
         </div>
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-          <span>Safe (75-100)</span>
+          <span>Safe Route (Green)</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-          <span>Moderate (55-74)</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
-          <span>Caution / Incident</span>
+          <span>Fastest / Shortcut (Amber)</span>
         </div>
       </div>
     </div>
