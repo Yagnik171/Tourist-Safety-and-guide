@@ -63,8 +63,8 @@ export const Navbar: React.FC = () => {
               </button>
 
               {isLocationDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-56 rounded-xl bg-slate-900 border border-slate-800 p-1.5 shadow-2xl z-50">
-                  <div className="text-[10px] font-bold text-slate-400 uppercase px-2.5 py-1">Select Region</div>
+                <div className="absolute left-0 mt-2 w-64 max-h-80 overflow-y-auto rounded-xl bg-slate-900 border border-slate-800 p-1.5 shadow-2xl z-50">
+                  <div className="text-[10px] font-bold text-slate-400 uppercase px-2.5 py-1">Select Region (22+ Places)</div>
                   {locations.map((loc) => (
                     <button
                       key={loc.id}
