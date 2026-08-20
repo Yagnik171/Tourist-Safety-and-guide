@@ -220,13 +220,24 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'safewander-storage',
+      version: 2, // bump version so old localStorage data is discarded
+      migrate: () => ({
+        // Reset trustedContact to the correct phone number
+        trustedContact: {
+          name: 'Emergency Guardian',
+          phone: '7424962369',
+        },
+      }),
       partialize: (state) => ({
         user: state.user,
         role: state.role,
         isAuthenticated: state.isAuthenticated,
         isDemoMode: state.isDemoMode,
         isSafetyModeActive: state.isSafetyModeActive,
-        trustedContact: state.trustedContact,
+        trustedContact: {
+          name: state.trustedContact?.name || 'Emergency Guardian',
+          phone: '7424962369', // always force-override to correct number
+        },
       }),
     }
   )

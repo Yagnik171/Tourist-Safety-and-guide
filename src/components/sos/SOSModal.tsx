@@ -32,8 +32,9 @@ export const SOSModal: React.FC<SOSModalProps> = ({ isOpen, onClose }) => {
     lng: currentLocation.longitude,
   });
 
-  const emergencyPhone = trustedContact?.phone || '7424962369';
-  const cleanPhone = emergencyPhone.replace(/\D/g, '').slice(-10); // 7424962369
+  // ALWAYS use 7424962369 as the designated SOS emergency phone
+  const SOS_TARGET_PHONE = '7424962369';
+  const cleanPhone = SOS_TARGET_PHONE;
 
   // Fetch real geolocation if available
   useEffect(() => {
