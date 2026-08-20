@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Navbar } from '@/components/layout/Navbar';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { SafeWanderMap } from '@/components/map/SafeWanderMap';
@@ -8,13 +9,14 @@ import { SafetyScoreRadial } from '@/components/safety/SafetyScoreRadial';
 import { useAppStore } from '@/lib/store';
 import { DEMO_LOCATIONS, DEMO_EMERGENCY_CONTACTS } from '@/lib/demo-data';
 import type { Location, IncidentReport } from '@/types';
-import { Shield, Layers, AlertTriangle, Phone, MapPin, Eye } from 'lucide-react';
+import { Shield, Layers, Phone, MapPin, Crosshair, Navigation, Sparkles } from 'lucide-react';
 
 export default function MapPage() {
   const { currentLocation, currentRating, incidents, setCurrentLocation } = useAppStore();
   const [selectedLoc, setSelectedLoc] = useState<Location>(currentLocation);
   const [selectedInc, setSelectedInc] = useState<IncidentReport | null>(null);
   const [showZones, setShowZones] = useState(true);
+  const [userLiveGps, setUserLiveGps] = useState<{ lat: number; lng: number } | null>(null);
 
   const handleSelectLocation = (loc: Location) => {
     setSelectedLoc(loc);
@@ -26,6 +28,10 @@ export default function MapPage() {
     setSelectedInc(inc);
   };
 
+  const handleLiveLocationFound = (coords: { lat: number; lng: number }) => {
+    setUserLiveGps(coords);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100">
       <Navbar />
@@ -35,16 +41,43 @@ export default function MapPage() {
 
         <main className="flex-1 p-4 md:p-6 flex flex-col lg:flex-row gap-6 h-[calc(100vh-4rem)] overflow-hidden">
           {/* Left Panel: Selected Location / Incident Safety Details */}
-          <div className="w-full lg:w-96 shrink-0 bg-slate-900 border border-slate-800 rounded-2xl p-5 overflow-y-auto space-y-6 flex flex-col justify-between">
+          <div className="w-full lg:w-96 shrink-0 bg-slate-900 border border-slate-800 rounded-2xl p-5 overflow-y-auto space-y-6 flex flex-col justify-between shadow-2xl">
             <div className="space-y-5">
               {/* Header */}
               <div>
-                <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest">
-                  Live Safety Spatial Intelligence
+                <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-cyan-400" /> Live Safety Spatial Intelligence
                 </span>
                 <h2 className="text-2xl font-black text-white mt-0.5">{selectedLoc.name}</h2>
-                <p className="text-xs text-slate-400">{selectedLoc.city}, Tamil Nadu, India</p>
+                <p className="text-xs text-slate-400">{selectedLoc.city}, {selectedLoc.state || 'India'}</p>
               </div>
+
+              {/* Live GPS Status Card */}
+              {userLiveGps ? (
+                <div className="p-3.5 rounded-xl bg-cyan-950/60 border border-cyan-500/40 text-xs space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-cyan-300 flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
+                      Live GPS Active
+                    </span>
+                    <span className="text-[10px] font-mono text-cyan-400">GPS Locked</span>
+                  </div>
+                  <div className="text-[11px] text-slate-300 font-mono">
+                    {userLiveGps.lat.toFixed(5)}° N, {userLiveGps.lng.toFixed(5)}° E
+                  </div>
+                  <Link
+                    href="/routes"
+                    className="w-full py-1.5 px-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 transition-colors"
+                  >
+                    <Navigation className="w-3 h-3" /> Calculate Safe Route from Here
+                  </Link>
+                </div>
+              ) : (
+                <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs flex items-center gap-2 text-slate-400">
+                  <Crosshair className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>Click <strong>&quot;Locate My Live GPS&quot;</strong> on the map to drop your real-time position pin.</span>
+                </div>
+              )}
 
               {/* Safety Score Card */}
               <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between">
@@ -53,7 +86,7 @@ export default function MapPage() {
                   <div className="text-[11px] text-emerald-400 font-semibold mt-0.5">🟢 Verified Safe Zone</div>
                   <div className="text-[10px] text-slate-500 mt-1">Calculated across 5 pillars</div>
                 </div>
-                <SafetyScoreRadial score={currentRating?.overall_score || 72} size="sm" showLabel={false} />
+                <SafetyScoreRadial score={currentRating?.overall_score || 75} size="sm" showLabel={false} />
               </div>
 
               {/* Map Layer Controls */}
@@ -94,7 +127,7 @@ export default function MapPage() {
               <div className="font-bold text-white flex items-center gap-1.5">
                 <Phone className="w-3.5 h-3.5 text-rose-400" /> Local Police Dispatch
               </div>
-              <p className="text-[11px] text-slate-400">Chennai Control Room: Dial 100 / 112</p>
+              <p className="text-[11px] text-slate-400">National Emergency Control: Dial 112 / 100</p>
             </div>
           </div>
 
@@ -108,6 +141,7 @@ export default function MapPage() {
               emergencyContacts={DEMO_EMERGENCY_CONTACTS}
               onSelectLocation={handleSelectLocation}
               onSelectIncident={handleSelectIncident}
+              onLiveLocationFound={handleLiveLocationFound}
               showSafetyZones={showZones}
               className="h-full w-full"
             />

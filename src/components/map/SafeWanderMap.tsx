@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import type { Location, IncidentReport, EmergencyContact, Route } from '@/types';
-import { Shield, Phone, Navigation, MapPin } from 'lucide-react';
+import { Shield, Phone, Navigation, MapPin, Crosshair, Sparkles } from 'lucide-react';
 import { getRiskColor, getRiskLevel } from '@/lib/services/safety-score';
 import { useMap } from 'react-leaflet';
 
@@ -16,6 +16,7 @@ interface SafeWanderMapProps {
   activeRoute?: Route | null;
   onSelectLocation?: (location: Location) => void;
   onSelectIncident?: (incident: IncidentReport) => void;
+  onLiveLocationFound?: (coords: { lat: number; lng: number }) => void;
   className?: string;
   showSafetyZones?: boolean;
 }
@@ -46,16 +47,18 @@ const Polyline = dynamic(
   { ssr: false }
 );
 
-// Map bounds controller to automatically fit and center route/markers
+// Map bounds controller to automatically fit and center route/markers/live GPS
 function MapController({
   center,
   zoom,
   activeRoute,
+  liveUserCoords,
   L,
 }: {
   center: [number, number];
   zoom: number;
   activeRoute?: Route | null;
+  liveUserCoords?: { lat: number; lng: number } | null;
   L: any;
 }) {
   const map = useMap();
@@ -68,10 +71,12 @@ function MapController({
       const latLngs = activeRoute.points.map((p) => [p.lat, p.lng]);
       const bounds = L.latLngBounds(latLngs);
       map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+    } else if (liveUserCoords) {
+      map.setView([liveUserCoords.lat, liveUserCoords.lng], 15, { animate: true });
     } else if (center) {
       map.setView(center, zoom);
     }
-  }, [map, L, activeRoute, center, zoom]);
+  }, [map, L, activeRoute, liveUserCoords, center, zoom]);
 
   return null;
 }
@@ -85,11 +90,15 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
   activeRoute = null,
   onSelectLocation,
   onSelectIncident,
+  onLiveLocationFound,
   className = 'h-[500px] w-full',
   showSafetyZones = true,
 }) => {
   const [mounted, setMounted] = useState(false);
   const [L, setL] = useState<any>(null);
+  const [liveCoords, setLiveCoords] = useState<{ lat: number; lng: number; accuracy?: number } | null>(null);
+  const [isLocating, setIsLocating] = useState(false);
+  const [locationError, setLocationError] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -97,6 +106,46 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
       setL(leaflet.default);
     });
   }, []);
+
+  // Function to capture live GPS location from browser/device
+  const handleLocateMe = useCallback(() => {
+    if (typeof window === 'undefined' || !('geolocation' in navigator)) {
+      setLocationError('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    setIsLocating(true);
+    setLocationError(null);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const coords = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          accuracy: position.coords.accuracy,
+        };
+        setLiveCoords(coords);
+        setIsLocating(false);
+        if (onLiveLocationFound) {
+          onLiveLocationFound({ lat: coords.lat, lng: coords.lng });
+        }
+      },
+      (error) => {
+        console.warn('Geolocation error:', error);
+        setIsLocating(false);
+        setLocationError(
+          error.code === error.PERMISSION_DENIED
+            ? 'GPS location permission denied. Please allow location in your browser settings.'
+            : 'Unable to retrieve live GPS position.'
+        );
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
+      }
+    );
+  }, [onLiveLocationFound]);
 
   if (!mounted || !L) {
     return (
@@ -106,6 +155,39 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
       </div>
     );
   }
+
+  // Live User Location Pulse Icon
+  const createLiveUserIcon = () =>
+    L.divIcon({
+      className: 'live-user-marker',
+      html: `<div style="
+        position: relative;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      ">
+        <div style="
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: rgba(56, 189, 248, 0.4);
+          animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        "></div>
+        <div style="
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background: #38bdf8;
+          border: 3px solid white;
+          box-shadow: 0 0 15px #38bdf8;
+        "></div>
+      </div>`,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12],
+    });
 
   // Custom Pin Icons
   const createStartPin = () =>
@@ -229,7 +311,7 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
         scrollWheelZoom={true}
         className="w-full h-full"
       >
-        <MapController center={center} zoom={zoom} activeRoute={activeRoute} L={L} />
+        <MapController center={center} zoom={zoom} activeRoute={activeRoute} liveUserCoords={liveCoords} L={L} />
 
         {/* CartoDB Tiles */}
         <TileLayer
@@ -237,10 +319,41 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
 
+        {/* Live User GPS Location Pulse & Accuracy Buffer */}
+        {liveCoords && (
+          <>
+            <Circle
+              center={[liveCoords.lat, liveCoords.lng]}
+              radius={liveCoords.accuracy || 150}
+              pathOptions={{
+                color: '#38bdf8',
+                fillColor: '#38bdf8',
+                fillOpacity: 0.15,
+                weight: 1,
+              }}
+            />
+            <Marker position={[liveCoords.lat, liveCoords.lng]} icon={createLiveUserIcon()}>
+              <Popup>
+                <div className="p-1 space-y-1 min-w-[170px]">
+                  <div className="font-bold text-xs text-cyan-400 flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" /> Your Live GPS Location
+                  </div>
+                  <div className="text-[11px] text-slate-300 font-mono">
+                    {liveCoords.lat.toFixed(5)}° N, {liveCoords.lng.toFixed(5)}° E
+                  </div>
+                  <div className="text-[10px] text-emerald-400 font-semibold">
+                    ✓ Real-Time GPS Tracking Active
+                  </div>
+                </div>
+              </Popup>
+            </Marker>
+          </>
+        )}
+
         {/* Safety Zones */}
         {showSafetyZones &&
           locations.map((loc) => {
-            const mockScore = loc.city === 'Chennai' ? 72 : loc.city === 'Bengaluru' ? 78 : 65;
+            const mockScore = loc.city === 'Chennai' ? 72 : loc.city === 'Bengaluru' ? 78 : 80;
             const risk = getRiskLevel(mockScore);
             const color = getRiskColor(risk);
 
@@ -376,9 +489,33 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
         )}
       </MapContainer>
 
+      {/* Floating Locate Me GPS Action Button */}
+      <div className="absolute top-4 right-4 z-[1000] flex flex-col items-end gap-2">
+        <button
+          type="button"
+          onClick={handleLocateMe}
+          disabled={isLocating}
+          className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold shadow-2xl transition-all border ${
+            liveCoords
+              ? 'bg-cyan-500 text-slate-950 border-cyan-300 shadow-cyan-950/60 ring-2 ring-cyan-400/40'
+              : 'bg-slate-900/95 hover:bg-slate-800 text-white border-slate-700 shadow-black/80'
+          }`}
+          title="Track Live GPS Location"
+        >
+          <Crosshair className={`w-4 h-4 ${isLocating ? 'animate-spin text-cyan-400' : liveCoords ? 'text-slate-950' : 'text-cyan-400'}`} />
+          <span>{isLocating ? 'Locating GPS...' : liveCoords ? 'GPS Active (Centered)' : '🎯 Locate My Live GPS'}</span>
+        </button>
+
+        {locationError && (
+          <div className="bg-rose-950/90 border border-rose-500 text-rose-200 text-[11px] p-2 rounded-xl max-w-xs shadow-xl">
+            {locationError}
+          </div>
+        )}
+      </div>
+
       {/* Floating Route Info Overlay if active */}
       {activeRoute && (
-        <div className="absolute top-3 left-3 z-[1000] bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl p-3.5 shadow-2xl text-xs space-y-1 text-slate-300 max-w-xs">
+        <div className="absolute top-4 left-4 z-[1000] bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl p-3.5 shadow-2xl text-xs space-y-1 text-slate-300 max-w-xs">
           <div className="font-bold text-white flex items-center gap-1.5">
             <Navigation className="w-4 h-4 text-cyan-400" />
             <span className="truncate">{activeRoute.name}</span>
@@ -394,9 +531,13 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
       )}
 
       {/* Floating Map Legend */}
-      <div className="absolute bottom-3 left-3 z-[1000] bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-2.5 text-[11px] space-y-1.5 shadow-xl text-slate-300">
+      <div className="absolute bottom-4 left-4 z-[1000] bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-2.5 text-[11px] space-y-1.5 shadow-xl text-slate-300">
         <div className="font-bold text-slate-200 mb-1 flex items-center gap-1">
           <Shield className="w-3.5 h-3.5 text-cyan-400" /> Safety Legend
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
+          <span>You Are Here (Live GPS)</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
