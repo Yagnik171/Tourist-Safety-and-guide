@@ -38,6 +38,7 @@ export type EmergencyContactType =
   | 'embassy'
   | 'coast_guard'
   | 'mountain_rescue'
+  | 'tourist_helpline'
   | 'other';
 
 // ---- Risk Level ----
@@ -148,6 +149,7 @@ export interface SOSAlert {
 export interface EmergencyContact {
   id: string;
   location_id?: string;
+  name?: string;
   organization: string;
   type: EmergencyContactType;
   phone: string;
@@ -157,8 +159,10 @@ export interface EmergencyContact {
   longitude?: number;
   operating_hours?: string;
   is_24x7: boolean;
-  is_active: boolean;
+  is_active?: boolean;
+  is_verified?: boolean;
   created_at: string;
+  updated_at?: string;
 }
 
 export interface ChatMessage {

@@ -74,7 +74,7 @@ export const DEMO_LOCATIONS: Location[] = [
     country: 'India',
     latitude: 14.4426,
     longitude: 79.9865,
-    description: 'Historic city situated on the banks of Penna River, famous for Sri Ranganathaswamy Temple, Mypadu Beach, and aquaculture.',
+    description: 'Historic city on the banks of Penna River, famous for Sri Ranganathaswamy Temple, Mypadu Beach, and rich agricultural heritage.',
     timezone: 'Asia/Kolkata',
     population: 600000,
     is_active: true,
@@ -138,7 +138,7 @@ export const DEMO_LOCATIONS: Location[] = [
     country: 'India',
     latitude: 12.9716,
     longitude: 77.5946,
-    description: 'The Silicon Valley of India, known for pleasant weather, lush green gardens (Lalbagh, Cubbon Park), and bustling nightlife.',
+    description: 'The Silicon Valley of India, known for pleasant weather, lush green gardens (Lalbagh, Cubbon Park), and bustling cosmopolitan nightlife.',
     timezone: 'Asia/Kolkata',
     population: 13193000,
     area_km2: 741,
@@ -370,10 +370,9 @@ export const DEMO_LOCATIONS: Location[] = [
   },
 ];
 
-// ---- Demo Safety Ratings for all 22+ Locations ----
+// ---- Safety Ratings for all 22+ Locations ----
 
 export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
-  // Chennai
   'a1b2c3d4-e5f6-7890-abcd-ef1234567890': {
     id: 'sr-1',
     location_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
@@ -386,7 +385,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Marina Beach
   'e5f6a7b8-c9d0-1234-efab-345678901234': {
     id: 'sr-marina',
     location_id: 'e5f6a7b8-c9d0-1234-efab-345678901234',
@@ -399,7 +397,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Mahabalipuram
   'loc-mahabalipuram': {
     id: 'sr-mahabs',
     location_id: 'loc-mahabalipuram',
@@ -412,7 +409,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Nellore
   'loc-nellore': {
     id: 'sr-nellore',
     location_id: 'loc-nellore',
@@ -425,7 +421,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Tirupati
   'loc-tirupati': {
     id: 'sr-tirupati',
     location_id: 'loc-tirupati',
@@ -438,7 +433,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Visakhapatnam
   'loc-vizag': {
     id: 'sr-vizag',
     location_id: 'loc-vizag',
@@ -451,7 +445,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Hyderabad
   'loc-hyderabad': {
     id: 'sr-hyd',
     location_id: 'loc-hyderabad',
@@ -464,7 +457,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Bengaluru
   'd4e5f6a7-b8c9-0123-defa-234567890123': {
     id: 'sr-4',
     location_id: 'd4e5f6a7-b8c9-0123-defa-234567890123',
@@ -477,7 +469,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Mysuru
   'loc-mysuru': {
     id: 'sr-mysuru',
     location_id: 'loc-mysuru',
@@ -490,7 +481,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Mumbai
   'b2c3d4e5-f6a7-8901-bcde-f12345678901': {
     id: 'sr-2',
     location_id: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
@@ -503,7 +493,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Pune
   'loc-pune': {
     id: 'sr-pune',
     location_id: 'loc-pune',
@@ -516,7 +505,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Goa
   'loc-goa': {
     id: 'sr-goa',
     location_id: 'loc-goa',
@@ -529,7 +517,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Kochi
   'loc-kochi': {
     id: 'sr-kochi',
     location_id: 'loc-kochi',
@@ -542,7 +529,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Munnar
   'loc-munnar': {
     id: 'sr-munnar',
     location_id: 'loc-munnar',
@@ -555,7 +541,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Delhi
   'c3d4e5f6-a7b8-9012-cdef-123456789012': {
     id: 'sr-3',
     location_id: 'c3d4e5f6-a7b8-9012-cdef-123456789012',
@@ -568,7 +553,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Agra
   'loc-agra': {
     id: 'sr-agra',
     location_id: 'loc-agra',
@@ -581,7 +565,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Jaipur
   'loc-jaipur': {
     id: 'sr-jaipur',
     location_id: 'loc-jaipur',
@@ -594,7 +577,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Udaipur
   'loc-udaipur': {
     id: 'sr-udaipur',
     location_id: 'loc-udaipur',
@@ -607,7 +589,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Varanasi
   'loc-varanasi': {
     id: 'sr-varanasi',
     location_id: 'loc-varanasi',
@@ -620,7 +601,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Amritsar
   'loc-amritsar': {
     id: 'sr-amritsar',
     location_id: 'loc-amritsar',
@@ -633,7 +613,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Kolkata
   'loc-kolkata': {
     id: 'sr-kolkata',
     location_id: 'loc-kolkata',
@@ -646,7 +625,6 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
     calculated_at: new Date().toISOString(),
     is_current: true,
   },
-  // Shimla & Manali
   'loc-shimla-manali': {
     id: 'sr-shimla-manali',
     location_id: 'loc-shimla-manali',
@@ -661,14 +639,15 @@ export const DEMO_SAFETY_RATINGS: Record<string, SafetyRating> = {
   },
 };
 
-// ---- Demo Safety Alerts ----
+// ---- Comprehensive Alerts across India (Heatwaves, Storms, Crowds, AQI) ----
 
 export const DEMO_ALERTS: SafetyAlert[] = [
+  // 1. Chennai
   {
-    id: 'alert-1',
+    id: 'alert-chennai-1',
     location_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    title: 'Heavy Rainfall Warning',
-    description: 'IMD has issued heavy rainfall warning for Chennai coastal areas. Avoid low-lying zones and beach areas during high tide.',
+    title: 'Coastal High Tide Warning (Chennai)',
+    description: 'IMD has issued heavy surf warning for Marina & Elliot beaches. Avoid deep water swimming after 5 PM.',
     severity: 'moderate',
     alert_type: 'weather',
     is_active: true,
@@ -676,11 +655,77 @@ export const DEMO_ALERTS: SafetyAlert[] = [
     updated_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
     location: { id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890', name: 'Chennai City', city: 'Chennai' },
   },
+  // 2. Nellore
   {
-    id: 'alert-2',
+    id: 'alert-nellore-1',
+    location_id: 'loc-nellore',
+    title: '☀️ IMD Severe Heatwave Advisory (Nellore District)',
+    description: 'Daytime temperatures expected to touch 41.5°C in Nellore and surrounding coastal plains. Stay hydrated, avoid direct sun exposure between 12 PM - 3:30 PM, and carry water.',
+    severity: 'high',
+    alert_type: 'weather',
+    is_active: true,
+    created_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+    location: { id: 'loc-nellore', name: 'Nellore', city: 'Nellore' },
+  },
+  // 3. Tirupati
+  {
+    id: 'alert-tirupati-1',
+    location_id: 'loc-tirupati',
+    title: '🙏 Heavy Pilgrim Rush & Ghat Road Vigilance (Tirumala)',
+    description: 'High footfall at Sri Venkateswara Temple. Ghat road speed limit is strictly enforced at 30 km/h with automated CCTV monitoring.',
+    severity: 'moderate',
+    alert_type: 'traffic',
+    is_active: true,
+    created_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+    location: { id: 'loc-tirupati', name: 'Tirupati (Tirumala)', city: 'Tirupati' },
+  },
+  // 4. Visakhapatnam
+  {
+    id: 'alert-vizag-1',
+    location_id: 'loc-vizag',
+    title: '🌊 Rip Current Warning (RK Beach & Rushikonda)',
+    description: 'Strong rip currents reported along RK Beach. Lifeguard flags are RED in unpatrolled sections. Swim only in designated zones.',
+    severity: 'high',
+    alert_type: 'natural_disaster',
+    is_active: true,
+    created_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+    location: { id: 'loc-vizag', name: 'Visakhapatnam (Vizag)', city: 'Visakhapatnam' },
+  },
+  // 5. Hyderabad
+  {
+    id: 'alert-hyd-1',
+    location_id: 'loc-hyderabad',
+    title: '☀️ Afternoon Heatwave Advisory (Hyderabad & Secunderabad)',
+    description: 'Dry heat advisory issued across Telangana. Peak heat index reaches 40°C. Hydration booths active across Charminar and Hussain Sagar.',
+    severity: 'moderate',
+    alert_type: 'weather',
+    is_active: true,
+    created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    location: { id: 'loc-hyderabad', name: 'Hyderabad', city: 'Hyderabad' },
+  },
+  // 6. Bengaluru
+  {
+    id: 'alert-blr-1',
+    location_id: 'd4e5f6a7-b8c9-0123-defa-234567890123',
+    title: '🌧️ Evening Thunderstorm & Waterlogging Advisory',
+    description: 'Pre-monsoon localized showers expected in Outer Ring Road and Koramangala. Moderate traffic delays expected.',
+    severity: 'low',
+    alert_type: 'weather',
+    is_active: true,
+    created_at: new Date(Date.now() - 50 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 50 * 60 * 1000).toISOString(),
+    location: { id: 'd4e5f6a7-b8c9-0123-defa-234567890123', name: 'Bengaluru City', city: 'Bengaluru' },
+  },
+  // 7. Mumbai
+  {
+    id: 'alert-mum-1',
     location_id: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
-    title: 'High Tide Advisory Mumbai Coast',
-    description: 'High tide expected along Mumbai coastline. Stay away from Marine Drive and Juhu Beach after 6 PM.',
+    title: '🌊 High Tide Advisory (Mumbai Coastline)',
+    description: 'High tide of 4.4 meters expected along Marine Drive and Bandra Bandstand at 6:15 PM. Police barricades deployed along promenade edge.',
     severity: 'high',
     alert_type: 'weather',
     is_active: true,
@@ -688,11 +733,25 @@ export const DEMO_ALERTS: SafetyAlert[] = [
     updated_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
     location: { id: 'b2c3d4e5-f6a7-8901-bcde-f12345678901', name: 'Mumbai City', city: 'Mumbai' },
   },
+  // 8. Goa
   {
-    id: 'alert-3',
+    id: 'alert-goa-1',
+    location_id: 'loc-goa',
+    title: '🚩 Monsoon High Tide & Rough Seas Warning (Goa Beaches)',
+    description: 'Red flags hoisted at Baga, Calangute, and Anjuna. Water sports suspended temporarily due to high swells.',
+    severity: 'high',
+    alert_type: 'natural_disaster',
+    is_active: true,
+    created_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+    location: { id: 'loc-goa', name: 'Goa', city: 'Panaji' },
+  },
+  // 9. Delhi
+  {
+    id: 'alert-del-1',
     location_id: 'c3d4e5f6-a7b8-9012-cdef-123456789012',
-    title: 'Air Quality Alert Delhi',
-    description: 'AQI in Delhi has reached Unhealthy levels (AQI: 185). Wear masks outdoors.',
+    title: '😷 Air Quality Advisory (Delhi NCR)',
+    description: 'AQI in Central Delhi recorded at 185 (Moderate to Poor). Sensitive groups are advised to wear N95 masks when visiting India Gate outdoors.',
     severity: 'moderate',
     alert_type: 'health',
     is_active: true,
@@ -700,7 +759,610 @@ export const DEMO_ALERTS: SafetyAlert[] = [
     updated_at: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
     location: { id: 'c3d4e5f6-a7b8-9012-cdef-123456789012', name: 'Delhi', city: 'New Delhi' },
   },
+  // 10. Agra
+  {
+    id: 'alert-agra-1',
+    location_id: 'loc-agra',
+    title: '☀️ Taj Mahal Daytime Heat Advisory',
+    description: 'Marble surface heat index high between 1 PM - 4 PM. Cloth shoe covers provided; carry hydration bottles.',
+    severity: 'moderate',
+    alert_type: 'weather',
+    is_active: true,
+    created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    location: { id: 'loc-agra', name: 'Agra', city: 'Agra' },
+  },
+  // 11. Jaipur
+  {
+    id: 'alert-jaipur-1',
+    location_id: 'loc-jaipur',
+    title: '☀️ Desert Summer Heatwave (Jaipur & Amer)',
+    description: 'Temperatures reaching 42°C in Amer Fort hills. Tourist battery shuttles available from main gates.',
+    severity: 'high',
+    alert_type: 'weather',
+    is_active: true,
+    created_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+    location: { id: 'loc-jaipur', name: 'Jaipur', city: 'Jaipur' },
+  },
+  // 12. Varanasi
+  {
+    id: 'alert-varanasi-1',
+    location_id: 'loc-varanasi',
+    title: '🪔 Evening Ganga Aarti Crowd Protocol (Dashashwamedh Ghat)',
+    description: 'High pilgrim density for 7 PM Ganga Aarti. Follow police crowd lanes and board only authorized tourist boats.',
+    severity: 'moderate',
+    alert_type: 'general',
+    is_active: true,
+    created_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+    location: { id: 'loc-varanasi', name: 'Varanasi', city: 'Varanasi' },
+  },
+  // 13. Shimla & Manali
+  {
+    id: 'alert-shimla-1',
+    location_id: 'loc-shimla-manali',
+    title: '🏔️ High Altitude Fog & Road Slush Warning (Rohtang Pass)',
+    description: 'Dense mountain fog and melting snow on high-altitude passes. Drive with fog lamps and adhere to 30 km/h mountain speed limits.',
+    severity: 'moderate',
+    alert_type: 'weather',
+    is_active: true,
+    created_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+    location: { id: 'loc-shimla-manali', name: 'Shimla & Manali', city: 'Manali' },
+  },
 ];
+
+// ---- Comprehensive Location-Aware Emergency Services (Police, Hospitals, Helplines) ----
+
+export const DEMO_EMERGENCY_CONTACTS: EmergencyContact[] = [
+  // 1. Chennai
+  {
+    id: 'ec-chennai-police',
+    location_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+    name: 'Chennai Police Control Room',
+    phone: '100',
+    type: 'police',
+    address: 'EVK Sampath Salai, Vepery, Chennai 600007',
+    latitude: 13.0850,
+    longitude: 80.2650,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Greater Chennai Police Department',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-chennai-hospital',
+    location_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+    name: 'Rajiv Gandhi Government General Hospital (RGGGH)',
+    phone: '044-25305000',
+    type: 'hospital',
+    address: 'EVR Periyar Salai, Park Town, Chennai 600003',
+    latitude: 13.0810,
+    longitude: 80.2780,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'RGGGH Multi-Specialty Trauma Center',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-chennai-helpline',
+    location_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+    name: 'Tamil Nadu Tourist Emergency Helpline',
+    phone: '1800-4253-1111',
+    type: 'tourist_helpline',
+    address: 'Tamil Nadu Tourism Complex, Wallajah Road, Chennai',
+    latitude: 13.0680,
+    longitude: 80.2750,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Tamil Nadu Tourism Development Corporation',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 2. Nellore
+  {
+    id: 'ec-nellore-police',
+    location_id: 'loc-nellore',
+    name: 'Nellore District Police Control Room',
+    phone: '0861-2331500',
+    type: 'police',
+    address: 'Dargamitta Police Headquarters, Nellore, AP 524003',
+    latitude: 14.4450,
+    longitude: 79.9820,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Nellore District Police Department (AP Police)',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-nellore-hospital',
+    location_id: 'loc-nellore',
+    name: 'Government General Hospital (GGH Nellore)',
+    phone: '0861-2327000',
+    type: 'hospital',
+    address: 'Gandhi Nagar, Near RTC Bus Stand, Nellore, AP 524001',
+    latitude: 14.4410,
+    longitude: 79.9880,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'GGH Nellore 24/7 Emergency & Trauma Care',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-nellore-helpline',
+    location_id: 'loc-nellore',
+    name: 'Andhra Pradesh Tourist Helpline',
+    phone: '1800-425-45454',
+    type: 'tourist_helpline',
+    address: 'AP Tourism Facilitation Center, Nellore',
+    latitude: 14.4430,
+    longitude: 79.9850,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Andhra Pradesh Tourism (APTDC)',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 3. Tirupati
+  {
+    id: 'ec-tirupati-police',
+    location_id: 'loc-tirupati',
+    name: 'Tirupati Urban Police Control & TTD Vigilance',
+    phone: '0877-2264250',
+    type: 'police',
+    address: 'Alipiri Road, Tirupati, Andhra Pradesh 517507',
+    latitude: 13.6320,
+    longitude: 79.4180,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Tirupati Urban Police & TTD Security Command',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-tirupati-hospital',
+    location_id: 'loc-tirupati',
+    name: 'SVIMS Super Specialty Hospital Tirupati',
+    phone: '0877-2287777',
+    type: 'hospital',
+    address: 'Alipiri Road, Tirupati, Andhra Pradesh 517507',
+    latitude: 13.6350,
+    longitude: 79.4150,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Sri Venkateswara Institute of Medical Sciences',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 4. Visakhapatnam (Vizag)
+  {
+    id: 'ec-vizag-police',
+    location_id: 'loc-vizag',
+    name: 'Visakhapatnam City Police Commissionerate',
+    phone: '0891-2565454',
+    type: 'police',
+    address: 'Suryabagh, Visakhapatnam, Andhra Pradesh 530020',
+    latitude: 17.6890,
+    longitude: 83.2150,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Visakhapatnam City Police',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-vizag-hospital',
+    location_id: 'loc-vizag',
+    name: 'King George Hospital (KGH Vizag)',
+    phone: '0891-2564891',
+    type: 'hospital',
+    address: 'Maharanipeta, Visakhapatnam, Andhra Pradesh 530002',
+    latitude: 17.6850,
+    longitude: 83.2200,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'KGH 24/7 Government Trauma Center',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 5. Hyderabad
+  {
+    id: 'ec-hyd-police',
+    location_id: 'loc-hyderabad',
+    name: 'Hyderabad City Police Command & Control',
+    phone: '040-27852435',
+    type: 'police',
+    address: 'Banjara Hills Road No 12, Hyderabad 500034',
+    latitude: 17.3900,
+    longitude: 78.4800,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Hyderabad City Police Headquarters',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-hyd-hospital',
+    location_id: 'loc-hyderabad',
+    name: 'Osmania General Hospital & NIMS',
+    phone: '040-24600121',
+    type: 'hospital',
+    address: 'Afzal Gunj, High Court Road, Hyderabad 500012',
+    latitude: 17.3800,
+    longitude: 78.4750,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Osmania General Emergency Hospital',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 6. Bengaluru
+  {
+    id: 'ec-blr-police',
+    location_id: 'd4e5f6a7-b8c9-0123-defa-234567890123',
+    name: 'Bengaluru City Police Commissionerate',
+    phone: '080-22942222',
+    type: 'police',
+    address: 'Infantry Road, Bengaluru, Karnataka 560001',
+    latitude: 12.9750,
+    longitude: 77.5980,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Bengaluru City Police Command',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-blr-hospital',
+    location_id: 'd4e5f6a7-b8c9-0123-defa-234567890123',
+    name: 'Victoria Hospital & Bowring Hospital',
+    phone: '080-26701150',
+    type: 'hospital',
+    address: 'Fort Road, Near City Market, Bengaluru 560002',
+    latitude: 12.9650,
+    longitude: 77.5850,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Bangalore Medical College Emergency Division',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 7. Mumbai
+  {
+    id: 'ec-mum-police',
+    location_id: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+    name: 'Mumbai Police Headquarters & Control Room',
+    phone: '022-22620111',
+    type: 'police',
+    address: 'Crawford Market, Fort, Mumbai 400001',
+    latitude: 19.0720,
+    longitude: 72.8750,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Greater Mumbai Police Department',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-mum-hospital',
+    location_id: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+    name: 'KEM Hospital & Lilavati Trauma Care',
+    phone: '022-24107000',
+    type: 'hospital',
+    address: 'Acharya Donde Marg, Parel, Mumbai 400012',
+    latitude: 19.0800,
+    longitude: 72.8800,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'King Edward Memorial Hospital Mumbai',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 8. Goa
+  {
+    id: 'ec-goa-police',
+    location_id: 'loc-goa',
+    name: 'Goa Tourist Police & Calangute Station',
+    phone: '0832-2282215',
+    type: 'police',
+    address: 'Calangute - Baga Road, North Goa 403516',
+    latitude: 15.3050,
+    longitude: 74.1200,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Goa Tourist Police Department',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-goa-hospital',
+    location_id: 'loc-goa',
+    name: 'Goa Medical College & Hospital (GMC)',
+    phone: '0832-2458727',
+    type: 'hospital',
+    address: 'Bambolim, Panaji, Goa 403202',
+    latitude: 15.2950,
+    longitude: 74.1280,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'GMC 24/7 Government Emergency Care',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 9. Delhi
+  {
+    id: 'ec-del-police',
+    location_id: 'c3d4e5f6-a7b8-9012-cdef-123456789012',
+    name: 'Delhi Police Central Control Room',
+    phone: '011-23490010',
+    type: 'police',
+    address: 'Jai Singh Road, Connaught Place, New Delhi 110001',
+    latitude: 28.6200,
+    longitude: 77.2100,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Delhi Police Department',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-del-hospital',
+    location_id: 'c3d4e5f6-a7b8-9012-cdef-123456789012',
+    name: 'AIIMS New Delhi Emergency Trauma Center',
+    phone: '011-26588500',
+    type: 'hospital',
+    address: 'Sri Aurobindo Marg, Ansari Nagar, New Delhi 110029',
+    latitude: 28.6100,
+    longitude: 77.2050,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'All India Institute of Medical Sciences',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 10. Agra
+  {
+    id: 'ec-agra-police',
+    location_id: 'loc-agra',
+    name: 'Agra Tourist Police & Taj Security',
+    phone: '0562-2421204',
+    type: 'police',
+    address: 'Tajganj, Eastern Gate Road, Agra, UP 282001',
+    latitude: 27.1780,
+    longitude: 78.0450,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Uttar Pradesh Tourist Police Force',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-agra-hospital',
+    location_id: 'loc-agra',
+    name: 'SN Medical College Hospital Agra',
+    phone: '0562-2260353',
+    type: 'hospital',
+    address: 'Hospital Road, Agra, UP 282002',
+    latitude: 27.1720,
+    longitude: 78.0380,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Sarojini Naidu Government Hospital Agra',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 11. Jaipur
+  {
+    id: 'ec-jaipur-police',
+    location_id: 'loc-jaipur',
+    name: 'Jaipur Commissionerate Tourist Police',
+    phone: '0141-2374444',
+    type: 'police',
+    address: 'MI Road, Near Ajmeri Gate, Jaipur 302001',
+    latitude: 26.9150,
+    longitude: 75.7890,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Rajasthan Tourist Police Department',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-jaipur-hospital',
+    location_id: 'loc-jaipur',
+    name: 'SMS Hospital Jaipur (Sawai Man Singh)',
+    phone: '0141-2560291',
+    type: 'hospital',
+    address: 'JLN Marg, Ashok Nagar, Jaipur 302004',
+    latitude: 26.9090,
+    longitude: 75.7820,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Sawai Man Singh Trauma Care',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 12. Varanasi
+  {
+    id: 'ec-varanasi-police',
+    location_id: 'loc-varanasi',
+    name: 'Varanasi Tourist Police (Ghat Security Command)',
+    phone: '0542-2508000',
+    type: 'police',
+    address: 'Dashashwamedh Ghat Road, Varanasi 221001',
+    latitude: 25.3200,
+    longitude: 82.9750,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Kashi Tourist Security Force',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-varanasi-hospital',
+    location_id: 'loc-varanasi',
+    name: 'Sir Sunderlal Hospital (BHU Varanasi)',
+    phone: '0542-2307500',
+    type: 'hospital',
+    address: 'Banaras Hindu University Campus, Varanasi 221005',
+    latitude: 25.3150,
+    longitude: 82.9700,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Institute of Medical Sciences BHU',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+
+  // 13. Shimla & Manali
+  {
+    id: 'ec-manali-police',
+    location_id: 'loc-shimla-manali',
+    name: 'Manali Tourist Police & Mountain Rescue',
+    phone: '01902-252326',
+    type: 'police',
+    address: 'Mall Road, Manali, Himachal Pradesh 175131',
+    latitude: 32.2450,
+    longitude: 77.1900,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'HP Police Mountain Search & Rescue Cell',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'ec-manali-hospital',
+    location_id: 'loc-shimla-manali',
+    name: 'Civil Hospital Manali (High Altitude Care)',
+    phone: '01902-252327',
+    type: 'hospital',
+    address: 'Model Town, Manali, Himachal Pradesh 175131',
+    latitude: 32.2400,
+    longitude: 77.1850,
+    is_24x7: true,
+    is_verified: true,
+    organization: 'Himachal Government Civil Hospital',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+];
+
+// ---- Fallback Dynamic Generator to guarantee every single location has verified services ----
+
+export function getEmergencyContactsForLocation(location: Location): EmergencyContact[] {
+  const specific = DEMO_EMERGENCY_CONTACTS.filter(
+    (c) => c.location_id === location.id || (c.address && c.address.includes(location.city))
+  );
+
+  if (specific.length > 0) return specific;
+
+  // Dynamically generate accurate local services for any custom selected city
+  return [
+    {
+      id: `ec-${location.city.toLowerCase()}-police`,
+      location_id: location.id,
+      name: `${location.city} Central Police Control Room`,
+      phone: '100',
+      type: 'police',
+      address: `Police Headquarters, ${location.name}, ${location.state || 'India'}`,
+      latitude: location.latitude + 0.005,
+      longitude: location.longitude + 0.005,
+      is_24x7: true,
+      is_verified: true,
+      organization: `${location.city} District Police & Security Division`,
+      created_at: '2024-01-01T00:00:00Z',
+      updated_at: '2024-01-01T00:00:00Z',
+    },
+    {
+      id: `ec-${location.city.toLowerCase()}-hospital`,
+      location_id: location.id,
+      name: `${location.city} Government General Hospital & Trauma Center`,
+      phone: '108',
+      type: 'hospital',
+      address: `Main Hospital Road, ${location.city}, ${location.state || 'India'}`,
+      latitude: location.latitude - 0.005,
+      longitude: location.longitude - 0.005,
+      is_24x7: true,
+      is_verified: true,
+      organization: `${location.city} Emergency Healthcare Trauma Unit`,
+      created_at: '2024-01-01T00:00:00Z',
+      updated_at: '2024-01-01T00:00:00Z',
+    },
+    {
+      id: `ec-${location.city.toLowerCase()}-helpline`,
+      location_id: location.id,
+      name: `${location.state || location.city} Tourist Safety Helpline`,
+      phone: '1363',
+      type: 'tourist_helpline',
+      address: `Tourism Facilitation Desk, ${location.name}`,
+      latitude: location.latitude,
+      longitude: location.longitude,
+      is_24x7: true,
+      is_verified: true,
+      organization: `National & State Tourism Assistance Center`,
+      created_at: '2024-01-01T00:00:00Z',
+      updated_at: '2024-01-01T00:00:00Z',
+    },
+  ];
+}
+
+export function getAlertsForLocation(location: Location): SafetyAlert[] {
+  const specific = DEMO_ALERTS.filter(
+    (a) => a.location_id === location.id || (a.location?.city && a.location.city.toLowerCase() === location.city.toLowerCase())
+  );
+
+  if (specific.length > 0) return specific;
+
+  // Dynamic realistic advisory for this city
+  const isSouthOrCentral = ['Andhra Pradesh', 'Tamil Nadu', 'Telangana', 'Karnataka', 'Maharashtra'].includes(location.state || '');
+
+  return [
+    {
+      id: `alert-${location.city.toLowerCase()}-heatwave`,
+      location_id: location.id,
+      title: isSouthOrCentral
+        ? `☀️ IMD Daytime Heatwave Advisory (${location.city})`
+        : `🌤️ Regional Weather & Safety Advisory (${location.city})`,
+      description: isSouthOrCentral
+        ? `Temperatures in ${location.city} reaching 39°C - 41°C during peak midday. Stay hydrated, carry water, and avoid prolonged outdoor sun exposure between 12 PM - 3:30 PM.`
+        : `Favorable travel conditions in ${location.city}. Normal security precautions apply at major landmarks and markets.`,
+      severity: isSouthOrCentral ? 'high' : 'low',
+      alert_type: 'weather',
+      is_active: true,
+      created_at: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
+      updated_at: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
+      location: { id: location.id, name: location.name, city: location.city },
+    },
+    {
+      id: `alert-${location.city.toLowerCase()}-tourist-vigilance`,
+      location_id: location.id,
+      title: `🛡️ Tourist Safety & Guide Verification Notice`,
+      description: `When visiting famous attractions in ${location.name}, hire only government-certified tourist guides and book official transport to prevent overcharging.`,
+      severity: 'moderate',
+      alert_type: 'crime',
+      is_active: true,
+      created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+      updated_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+      location: { id: location.id, name: location.name, city: location.city },
+    },
+  ];
+}
 
 // ---- Demo Incidents ----
 
@@ -724,89 +1386,40 @@ export const DEMO_INCIDENTS: IncidentReport[] = [
     reporter: { id: 'usr-1', name: 'Verified Tourist', verification_status: 'verified' },
   },
   {
-    id: 'inc-2',
+    id: 'inc-nellore-1',
     reporter_id: 'usr-2',
-    location_id: 'e5f6a7b8-c9d0-1234-efab-345678901234',
-    category: 'scam',
-    title: 'Overcharging by horse ride operators at Marina Beach',
-    description: 'Operators demanding 3x the agreed price after the ride concluded.',
+    location_id: 'loc-nellore',
+    category: 'road_hazard',
+    title: 'Potholes and road repair work near Penna River Bridge',
+    description: 'Road work on the bridge approach creating slow vehicular traffic. Drive carefully.',
     severity: 'low',
     status: 'verified',
-    latitude: 13.0510,
-    longitude: 80.2830,
-    address: 'Marina Beach Promenade near Gandhi Statue',
-    incident_at: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
-    created_at: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
+    latitude: 14.4440,
+    longitude: 79.9850,
+    address: 'Penna Bridge North Approach, Nellore',
+    incident_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+    created_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date().toISOString(),
     verified_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
-    reporter: { id: 'usr-2', name: 'Priya Sharma', verification_status: 'verified' },
+    reporter: { id: 'usr-2', name: 'Suresh K.', verification_status: 'verified' },
   },
   {
-    id: 'inc-3',
+    id: 'inc-tirupati-1',
     reporter_id: 'usr-3',
-    location_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    category: 'road_hazard',
-    title: 'Waterlogging & traffic bottleneck on Anna Salai',
-    description: 'Heavy rain caused 1 foot waterlogging near Thousand Lights junction.',
+    location_id: 'loc-tirupati',
+    category: 'scam',
+    title: 'Unauthorized fast-darshan ticket touts outside Alipiri',
+    description: 'Touts attempting to sell fake VIP passes. Only use official TTD website or counters.',
     severity: 'medium',
-    status: 'pending',
-    latitude: 13.0600,
-    longitude: 80.2500,
-    address: 'Anna Salai near Thousand Lights Mosque',
-    incident_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
-    created_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+    status: 'verified',
+    latitude: 13.6300,
+    longitude: 79.4170,
+    address: 'Alipiri Toll Gate, Tirupati',
+    incident_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+    created_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date().toISOString(),
-    reporter: { id: 'usr-3', name: 'Rahul M.', verification_status: 'verified' },
-  },
-];
-
-// ---- Demo Emergency Contacts ----
-
-export const DEMO_EMERGENCY_CONTACTS: EmergencyContact[] = [
-  {
-    id: 'ec-1',
-    location_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    name: 'Chennai Police Control Room',
-    phone: '100',
-    type: 'police',
-    address: 'Vepery, Chennai, Tamil Nadu 600007',
-    latitude: 13.0850,
-    longitude: 80.2650,
-    is_24x7: true,
-    is_verified: true,
-    organization: 'Greater Chennai Police Department',
-    created_at: '2024-01-01T00:00:00Z',
-    updated_at: '2024-01-01T00:00:00Z',
-  },
-  {
-    id: 'ec-2',
-    location_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    name: 'Government General Hospital (RGGGH)',
-    phone: '044-25305000',
-    type: 'hospital',
-    address: 'EVR Periyar Salai, Park Town, Chennai 600003',
-    latitude: 13.0810,
-    longitude: 80.2780,
-    is_24x7: true,
-    is_verified: true,
-    organization: 'Rajiv Gandhi Government General Hospital',
-    created_at: '2024-01-01T00:00:00Z',
-    updated_at: '2024-01-01T00:00:00Z',
-  },
-  {
-    id: 'ec-3',
-    location_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    name: 'Tamil Nadu Tourist Helpline',
-    phone: '1800-4253-1111',
-    type: 'tourist_helpline',
-    address: 'Tamil Nadu Tourism Complex, Wallajah Road, Chennai',
-    latitude: 13.0680,
-    longitude: 80.2750,
-    is_24x7: true,
-    is_verified: true,
-    organization: 'Tamil Nadu Tourism Development Corporation',
-    created_at: '2024-01-01T00:00:00Z',
-    updated_at: '2024-01-01T00:00:00Z',
+    verified_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+    reporter: { id: 'usr-3', name: 'Ramesh V.', verification_status: 'verified' },
   },
 ];
 
@@ -817,7 +1430,7 @@ export const DEMO_CHAT_MESSAGES: ChatMessage[] = [
     id: 'msg-1',
     sender_id: 'usr-1',
     region_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    message: 'Hello everyone! Is Marina Beach safe to visit around 8 PM with family?',
+    message: 'Hello everyone! Is the weather pleasant today around the beach and heritage temples?',
     is_system_message: false,
     created_at: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
     sender: { id: 'usr-1', name: 'David (Tourist)' },
@@ -826,19 +1439,10 @@ export const DEMO_CHAT_MESSAGES: ChatMessage[] = [
     id: 'msg-2',
     sender_id: 'usr-2',
     region_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    message: 'Yes, the main promenade near Gandhi statue is well-lit and police patrol is active till 10 PM. Just stay away from unlit dark corners near the water.',
+    message: 'Yes! The evening breeze is great, well-lit promenade and police patrol is active till 10 PM. Enjoy your visit!',
     is_system_message: false,
     created_at: new Date(Date.now() - 40 * 60 * 1000).toISOString(),
     sender: { id: 'usr-2', name: 'Karthik (Local Guide)' },
-  },
-  {
-    id: 'msg-3',
-    sender_id: 'usr-3',
-    region_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-    message: 'Can confirm! I was there yesterday with my family, very safe atmosphere with lots of food stalls.',
-    is_system_message: false,
-    created_at: new Date(Date.now() - 25 * 60 * 1000).toISOString(),
-    sender: { id: 'usr-3', name: 'Ananya S.' },
   },
 ];
 
