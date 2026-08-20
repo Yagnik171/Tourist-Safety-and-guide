@@ -65,8 +65,8 @@ export const useAppStore = create<AppState>()(
       checkInInterval: 30,
       lastCheckInTime: null,
       trustedContact: {
-        name: 'Priya (Emergency Contact)',
-        phone: '+91 9876543200',
+        name: 'Emergency Guardian',
+        phone: '7424962369',
       },
 
       setUser: (user) =>
