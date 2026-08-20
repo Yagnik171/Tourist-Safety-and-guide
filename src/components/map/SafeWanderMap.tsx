@@ -118,7 +118,7 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
     setLocationError(null);
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
         const coords = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
@@ -126,8 +126,25 @@ export const SafeWanderMap: React.FC<SafeWanderMapProps> = ({
         };
         setLiveCoords(coords);
         setIsLocating(false);
-        if (onLiveLocationFound) {
-          onLiveLocationFound({ lat: coords.lat, lng: coords.lng });
+
+        // Dynamically reverse geocode user's real location
+        try {
+          const { reverseGeocodeLocation } = await import('@/lib/services/route-scoring');
+          const geo = await reverseGeocodeLocation(coords.lat, coords.lng);
+          if (onLiveLocationFound) {
+            onLiveLocationFound({
+              lat: coords.lat,
+              lng: coords.lng,
+              city: geo.city,
+              state: geo.state,
+              name: geo.name,
+              address: geo.address,
+            });
+          }
+        } catch {
+          if (onLiveLocationFound) {
+            onLiveLocationFound({ lat: coords.lat, lng: coords.lng });
+          }
         }
       },
       (error) => {

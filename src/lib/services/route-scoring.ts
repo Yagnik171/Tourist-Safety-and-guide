@@ -93,6 +93,81 @@ export async function geocodeLocation(query: string): Promise<{ lat: number; lng
 }
 
 /**
+ * Reverse geocode GPS coordinates to city, state and human-readable place name
+ */
+export async function reverseGeocodeLocation(lat: number, lng: number): Promise<{
+  city: string;
+  state: string;
+  name: string;
+  address: string;
+}> {
+  // 1. Check proximity against closest indexed city in India (< 50 km)
+  let closestCity = 'Current Location';
+  let closestState = 'India';
+  let minDistance = Infinity;
+
+  for (const [, val] of Object.entries(CITY_COORDINATES)) {
+    const dist = haversineDistance({ lat, lng }, { lat: val.lat, lng: val.lng });
+    if (dist < minDistance) {
+      minDistance = dist;
+      closestCity = val.name;
+      closestState = val.state || 'India';
+    }
+  }
+
+  // 2. Try OpenStreetMap Nominatim Reverse Geocoding
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=14&addressdetails=1`;
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'SafeWander-Tourist-Platform/1.0' },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.address) {
+        const city =
+          data.address.city ||
+          data.address.town ||
+          data.address.municipality ||
+          data.address.county ||
+          data.address.district ||
+          closestCity;
+
+        const state = data.address.state || closestState;
+        const suburb = data.address.suburb || data.address.neighbourhood || data.address.village || '';
+        const name = suburb ? `${suburb}, ${city}` : city;
+
+        return {
+          city,
+          state,
+          name: name || 'Live GPS Location',
+          address: data.display_name || `${city}, ${state}`,
+        };
+      }
+    }
+  } catch (err) {
+    console.warn('Reverse geocode fetch error:', err);
+  }
+
+  // If closest city is within 60km, use it
+  if (minDistance < 60) {
+    return {
+      city: closestCity,
+      state: closestState,
+      name: `${closestCity} (Live GPS)`,
+      address: `${closestCity}, ${closestState}, India`,
+    };
+  }
+
+  return {
+    city: 'Live Location',
+    state: closestState,
+    name: `Live Spot (${lat.toFixed(3)}°N, ${lng.toFixed(3)}°E)`,
+    address: `${lat.toFixed(4)}° N, ${lng.toFixed(4)}° E, India`,
+  };
+}
+
+/**
  * Calculate approximate distance between two points (Haversine in km)
  */
 export function haversineDistance(p1: RoutePoint, p2: RoutePoint): number {
