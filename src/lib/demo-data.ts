@@ -1481,3 +1481,156 @@ export const DEMO_ADMIN_PROFILE: Profile = {
 };
 
 export const DEMO_SOS_ALERTS: SOSAlert[] = [];
+
+// ---- Per-City Safe Place Recommendations ----
+// Key is the city name (lowercase) or location ID prefix
+
+export type CityPlace = {
+  name: string;
+  category: 'Hotel' | 'Restaurant' | 'Attraction' | 'Shopping' | 'Healthcare' | 'Park';
+  safetyRating: number;
+  address: string;
+  desc: string;
+};
+
+export const CITY_RECOMMENDATIONS: Record<string, CityPlace[]> = {
+  chennai: [
+    { name: 'Taj Coromandel Hotel', category: 'Hotel', safetyRating: 95, address: 'Nungambakkam High Rd, Chennai', desc: '24/7 private security, verified concierge, well-lit corridors, trusted by international tourists.' },
+    { name: 'Saravana Bhavan', category: 'Restaurant', safetyRating: 91, address: 'Nelson Manickam Rd, Chennai', desc: 'Hygienic vegetarian cuisine, family-safe dining, high footfall and strong police presence nearby.' },
+    { name: 'Government Museum Chennai', category: 'Attraction', safetyRating: 93, address: 'Pantheon Rd, Egmore, Chennai', desc: 'Well-guarded heritage precinct, secure ticketing, visitor assistance desk, CCTV throughout.' },
+    { name: 'Express Avenue Mall', category: 'Shopping', safetyRating: 90, address: 'Whites Rd, Royapettah, Chennai', desc: 'Air-conditioned mall with private security, CCTV, emergency exits and medical aid center.' },
+    { name: 'Kapaleeshwarar Temple', category: 'Attraction', safetyRating: 88, address: 'Mylapore, Chennai', desc: 'Ancient Dravidian temple with dedicated police booth, tourist guides, and crowd control measures.' },
+  ],
+  nellore: [
+    { name: 'Hotel Minerva Grand', category: 'Hotel', safetyRating: 87, address: 'Trunk Rd, Nellore, Andhra Pradesh', desc: 'Business-class hotel with 24/7 front desk, secure parking, and CCTV surveillance.' },
+    { name: 'Sri Ranganathaswamy Temple', category: 'Attraction', safetyRating: 89, address: 'Rangasthala, Nellore', desc: 'Major Vaishnava temple with dedicated security personnel and tourist assistance counter.' },
+    { name: 'Nellore Boat Club', category: 'Park', safetyRating: 85, address: 'Krishnapatnam, Nellore', desc: 'Scenic reservoir park with police patrol, well-maintained walkways, and family-safe environment.' },
+    { name: 'Kovur Hotel & Restaurant', category: 'Restaurant', safetyRating: 83, address: 'Magunta Layout, Nellore', desc: 'Local Andhra cuisine, clean kitchen, popular with families and verified by locals.' },
+    { name: 'District Hospital Nellore', category: 'Healthcare', safetyRating: 92, address: 'GT Road, Nellore', desc: '24/7 government hospital with trauma unit, blood bank, and emergency response team.' },
+  ],
+  tirupati: [
+    { name: 'Tirumala Tirupati Devasthanams Guesthouse', category: 'Hotel', safetyRating: 96, address: 'Tirumala Hills, Tirupati', desc: 'Official TTD-managed accommodation, highest security near the Venkateshwara Temple complex.' },
+    { name: 'Sri Venkateswara Temple', category: 'Attraction', safetyRating: 95, address: 'Tirumala, Tirupati, Andhra Pradesh', desc: 'Most visited pilgrimage site in India, massive security infrastructure, dedicated pilgrimage police.' },
+    { name: 'Sri Vari Padalu', category: 'Attraction', safetyRating: 90, address: 'Alipiri, Tirupati', desc: 'Sacred footprint shrine with police escort path, well-lit trekking route and medical posts.' },
+    { name: 'Bhimas Restaurant Tirupati', category: 'Restaurant', safetyRating: 88, address: 'Main Rd, Tirupati', desc: 'Certified vegetarian restaurant, frequently inspected, popular with pilgrims and tourists.' },
+    { name: 'SVIMS Hospital', category: 'Healthcare', safetyRating: 94, address: 'Alipiri Rd, Tirupati', desc: 'Top-tier government medical university with 24/7 emergency, ICU, and trauma care.' },
+  ],
+  vizag: [
+    { name: 'The Park Hotel Visakhapatnam', category: 'Hotel', safetyRating: 93, address: 'Beach Rd, Visakhapatnam', desc: 'Premium beachfront hotel, private security, concierge safety briefings for tourists.' },
+    { name: 'RK Beach (Rama Krishna Beach)', category: 'Attraction', safetyRating: 87, address: 'Beach Rd, Vizag', desc: 'Popular beach with police patrol boats, lifeguard posts, and tourist police booth.' },
+    { name: 'Araku Valley', category: 'Attraction', safetyRating: 88, address: 'Araku, Vizag District', desc: 'Scenic tribal hill station with forest guard presence and guided tourist programs.' },
+    { name: 'Bheemili Beach Restaurant', category: 'Restaurant', safetyRating: 85, address: 'Bheemunipatnam, Vizag', desc: 'Fresh seafood restaurant at scenic beach, family-friendly, health-inspected kitchen.' },
+    { name: 'INS Kursura Submarine Museum', category: 'Attraction', safetyRating: 92, address: 'RK Beach, Vizag', desc: 'Naval heritage museum with tight security, ticketed entry, and guided tours.' },
+  ],
+  hyderabad: [
+    { name: 'Taj Falaknuma Palace', category: 'Hotel', safetyRating: 98, address: 'Engine Bowli, Hyderabad', desc: 'Iconic 5-star palace hotel, elite security staff, private entrances, complete tourist safety.' },
+    { name: 'Charminar', category: 'Attraction', safetyRating: 86, address: 'Char Kaman, Hyderabad', desc: 'Historic 400-year-old monument with dedicated tourist police booth and heritage zone patrols.' },
+    { name: 'Golconda Fort', category: 'Attraction', safetyRating: 89, address: 'Ibrahim Bagh, Hyderabad', desc: 'UNESCO-listed fort with ASI security, guided tours, and well-maintained safe pathways.' },
+    { name: 'Paradise Biryani', category: 'Restaurant', safetyRating: 88, address: 'SD Rd, Secunderabad', desc: 'Most iconic Hyderabadi biryani chain, FSSAI certified, clean kitchen, air-conditioned dining.' },
+    { name: 'Hussain Sagar Lake', category: 'Park', safetyRating: 84, address: 'Tank Bund Rd, Hyderabad', desc: 'Scenic lake with police patrol, lifeguards on boats, and safe lakeside walking promenade.' },
+  ],
+  bengaluru: [
+    { name: 'The Leela Palace Bengaluru', category: 'Hotel', safetyRating: 96, address: 'Old Airport Rd, Bengaluru', desc: 'Luxury 5-star hotel with 24/7 security, digital access control, and international safety standards.' },
+    { name: 'Lalbagh Botanical Garden', category: 'Park', safetyRating: 90, address: 'Lalbagh Main Rd, Bengaluru', desc: '240-acre garden with police patrol, CCTV, and well-maintained safe walking paths.' },
+    { name: 'Cubbon Park', category: 'Park', safetyRating: 91, address: 'Kasturba Rd, Bengaluru', desc: 'City green zone with dedicated police post, CCTV, open amphitheater, and family-safe.' },
+    { name: 'MTR Restaurant (Mavalli Tiffin Rooms)', category: 'Restaurant', safetyRating: 92, address: 'Lalbagh Rd, Bengaluru', desc: 'Heritage 100-year-old restaurant, FSSAI certified, food hygiene award winner, safe and central.' },
+    { name: 'UB City Mall', category: 'Shopping', safetyRating: 93, address: 'Vittal Mallya Rd, Bengaluru', desc: 'Premium mall with biometric-access security, licensed security team, medical aid room.' },
+  ],
+  mumbai: [
+    { name: 'The Taj Mahal Palace Mumbai', category: 'Hotel', safetyRating: 98, address: 'Apollo Bunder, Colaba, Mumbai', desc: 'Iconic 5-star hotel with post-26/11 platinum-level security protocols and NSG-trained guards.' },
+    { name: 'Gateway of India', category: 'Attraction', safetyRating: 90, address: 'Apollo Bunder, Mumbai', desc: 'Iconic waterfront monument with CISF presence, tourist police booths, and metal detectors.' },
+    { name: 'Marine Drive', category: 'Attraction', safetyRating: 88, address: 'Netaji Subhash Chandra Bose Rd, Mumbai', desc: '3 km promenade with round-the-clock police patrolling, CCTV coverage, bright lighting.' },
+    { name: 'Britannia & Co. Restaurant', category: 'Restaurant', safetyRating: 89, address: 'Wakefield House, Ballard Estate, Mumbai', desc: 'Heritage Irani cafe, clean, FSSAI certified, very popular among tourists and locals.' },
+    { name: 'Colaba Causeway Market', category: 'Shopping', safetyRating: 83, address: 'Colaba Causeway, Mumbai', desc: 'Iconic market street with tourist police, CCTV, and popular among international visitors.' },
+  ],
+  goa: [
+    { name: 'W Goa Hotel', category: 'Hotel', safetyRating: 94, address: 'Vagator Beach, North Goa', desc: 'Award-winning beach resort with 24/7 security, lifeguard service, and tourist safety zone.' },
+    { name: 'Calangute Beach', category: 'Attraction', safetyRating: 82, address: 'Calangute, North Goa', desc: 'Most popular beach with lifeguard posts, tourist police booth, and beach surveillance drones.' },
+    { name: 'Basilica of Bom Jesus', category: 'Attraction', safetyRating: 93, address: 'Old Goa Rd, Goa', desc: 'UNESCO World Heritage Church with tight security, guided tours, and large CCTV network.' },
+    { name: 'Ritz Classic Restaurant', category: 'Restaurant', safetyRating: 90, address: 'MG Rd, Panaji, Goa', desc: 'Highly rated local Goan cuisine restaurant, health inspected, air-conditioned, safe.' },
+    { name: 'Anjuna Flea Market', category: 'Shopping', safetyRating: 80, address: 'Anjuna, North Goa', desc: 'Famous Wednesday market with tourist police, CCTV, and registered vendor system.' },
+  ],
+  jaipur: [
+    { name: 'Rambagh Palace Hotel', category: 'Hotel', safetyRating: 97, address: 'Bhawani Singh Rd, Jaipur', desc: 'Royal 5-star palace hotel, former residence of Maharaja, elite security and tourist care.' },
+    { name: 'Amber Fort', category: 'Attraction', safetyRating: 91, address: 'Devisinghpura, Amer, Jaipur', desc: 'UNESCO-listed Rajput fort with ASI security, guided tours, and tourist assistance center.' },
+    { name: 'Hawa Mahal', category: 'Attraction', safetyRating: 88, address: 'Badi Choupad, Jaipur', desc: 'Iconic pink sandstone palace with dedicated tourist police, CCTV, and managed entry queues.' },
+    { name: 'Laxmi Mishtan Bhandar (LMB)', category: 'Restaurant', safetyRating: 90, address: 'Johari Bazaar, Jaipur', desc: 'Heritage sweet shop and restaurant, FSSAI certified, very popular with domestic and foreign tourists.' },
+    { name: 'Johari Bazaar', category: 'Shopping', safetyRating: 84, address: 'Johari Bazaar Rd, Jaipur', desc: 'Famous gem and jewelry market with police booth, tourist escorts available and CCTV.' },
+  ],
+  delhi: [
+    { name: 'The Imperial Hotel Delhi', category: 'Hotel', safetyRating: 97, address: 'Janpath, New Delhi', desc: 'Iconic colonial 5-star hotel near Connaught Place, platinum security, trusted by heads of state.' },
+    { name: 'India Gate', category: 'Attraction', safetyRating: 90, address: 'Rajpath, New Delhi', desc: 'National war memorial with CRPF security, wide perimeter, CCTV, and night lighting.' },
+    { name: 'Qutub Minar', category: 'Attraction', safetyRating: 89, address: 'Aurobindo Marg, Delhi', desc: 'UNESCO World Heritage site with ASI security, guided tours, bag scanners at entry.' },
+    { name: 'Karim\'s Restaurant', category: 'Restaurant', safetyRating: 87, address: 'Gali Kababian, Jama Masjid, Delhi', desc: '100-year-old Mughal cuisine institution, FSSAI certified, popular with international tourists.' },
+    { name: 'Select Citywalk Mall', category: 'Shopping', safetyRating: 92, address: 'District Centre, Saket, Delhi', desc: 'Premium mall with airport-grade security, CCTV, medical center, and dedicated tourist help desk.' },
+  ],
+  agra: [
+    { name: 'ITC Mughal Hotel', category: 'Hotel', safetyRating: 95, address: 'Taj East Gate Rd, Agra', desc: 'Luxury heritage hotel steps from Taj Mahal, ASI-licensed guides, 24/7 security, and safe zone.' },
+    { name: 'Taj Mahal', category: 'Attraction', safetyRating: 93, address: 'Dharmapuri, Agra, Uttar Pradesh', desc: 'UNESCO World Heritage site with CISF security, metal detectors, bag scanners, and tourist police.' },
+    { name: 'Agra Fort', category: 'Attraction', safetyRating: 91, address: 'Rakabganj, Agra', desc: 'UNESCO-listed Mughal fort with ASI guards, guided tours, and dedicated tourist assistance cell.' },
+    { name: 'Pind Balluchi Restaurant', category: 'Restaurant', safetyRating: 86, address: 'Fatehabad Rd, Agra', desc: 'Well-rated restaurant near hotel strip, FSSAI certified, popular with tour groups.' },
+    { name: 'Sadar Bazaar Agra', category: 'Shopping', safetyRating: 82, address: 'Sadar Bazaar, Agra', desc: 'Main tourist shopping zone with police patrol, tourist guides, and registered vendors.' },
+  ],
+  varanasi: [
+    { name: 'BrijRama Palace Hotel', category: 'Hotel', safetyRating: 92, address: 'Darbhanga Ghat, Varanasi', desc: 'Heritage palace hotel on the Ganges Ghat, 24/7 staff, private security, and river patrol.' },
+    { name: 'Dashashwamedh Ghat', category: 'Attraction', safetyRating: 86, address: 'Godowlia, Varanasi, Uttar Pradesh', desc: 'Main ghats with police patrol boats, UP Tourist Police booths, and evening Ganga Aarti security.' },
+    { name: 'Kashi Vishwanath Temple', category: 'Attraction', safetyRating: 90, address: 'Vishwanath Gali, Varanasi', desc: 'Major Shiva temple with NSG-level security, CCTV throughout corridor, dedicated police outpost.' },
+    { name: 'Kashi Chaat Bhandar', category: 'Restaurant', safetyRating: 84, address: 'Godowlia, Varanasi', desc: 'Famous local chaat shop, clean and popular, food safety certified and frequently visited by tourists.' },
+    { name: 'Banaras Silk Weaving Centers', category: 'Shopping', safetyRating: 85, address: 'Varanasi Silk Belt', desc: 'Government-authorized silk emporiums with fixed price, no touting, safe for tourist shopping.' },
+  ],
+  kochi: [
+    { name: 'CGH Earth Brunton Boatyard', category: 'Hotel', safetyRating: 94, address: 'Fort Kochi, Kerala', desc: 'Award-winning heritage hotel by the sea, 24/7 security, fire safety certified, trusted by tourists.' },
+    { name: 'Fort Kochi (Chinese Fishing Nets)', category: 'Attraction', safetyRating: 90, address: 'Beach Rd, Fort Kochi, Kerala', desc: 'Historic fishing area with tourist police booth, CCTV, and safe walkable seafront promenade.' },
+    { name: 'Mattancherry Palace (Dutch Palace)', category: 'Attraction', safetyRating: 91, address: 'Palace Rd, Mattancherry, Kochi', desc: 'ASI-protected museum with professional security, guided tours, and emergency medical posts.' },
+    { name: 'Kayees Biryani', category: 'Restaurant', safetyRating: 88, address: 'Mattancherry, Kochi', desc: 'Kerala\'s most famous biryani, FSSAI certified, clean and popular with tourists worldwide.' },
+    { name: 'Lulu Mall Kochi', category: 'Shopping', safetyRating: 93, address: 'NH-47, Edapally, Kochi', desc: 'India\'s largest mall with top-tier security, CCTV, medical aid, and tourist helpdesk.' },
+  ],
+  kolkata: [
+    { name: 'The Oberoi Grand Kolkata', category: 'Hotel', safetyRating: 96, address: 'Jawaharlal Nehru Rd, Kolkata', desc: 'Heritage 5-star hotel on central road, elite security, CCTV, and 24/7 concierge safety desk.' },
+    { name: 'Victoria Memorial', category: 'Attraction', safetyRating: 92, address: 'Victoria Memorial Hall, Kolkata', desc: 'Iconic colonial museum with CISF guards, metal detectors, wide lawns, and tourist assistance.' },
+    { name: 'Howrah Bridge', category: 'Attraction', safetyRating: 84, address: 'Strand Rd, Howrah', desc: 'Iconic cantilever bridge with Kolkata Police patrols, camera network, and pedestrian safety zone.' },
+    { name: 'Peter Cat Restaurant', category: 'Restaurant', safetyRating: 89, address: 'Park St, Kolkata', desc: 'Legendary Kolkata restaurant famous for Chelo Kebab, FSSAI certified, central and very safe.' },
+    { name: 'New Market Kolkata', category: 'Shopping', safetyRating: 82, address: 'Sir Stuart Hogg Market, Kolkata', desc: 'Historic 150-year-old market with Kolkata Police booth, CCTV, and registered vendor system.' },
+  ],
+  amritsar: [
+    { name: 'Hyatt Amritsar', category: 'Hotel', safetyRating: 94, address: 'MBM Meadows, Amritsar', desc: '5-star hotel with 24/7 security, safe transportation to Golden Temple, and tourist assistance.' },
+    { name: 'Golden Temple (Harmandir Sahib)', category: 'Attraction', safetyRating: 96, address: 'Golden Temple Rd, Amritsar', desc: 'Holiest Sikh shrine with SGPC security, metal detectors, dedicated tourist police, and CCTV.' },
+    { name: 'Wagah Border Ceremony', category: 'Attraction', safetyRating: 93, address: 'Attari, Amritsar', desc: 'Famous military retreat ceremony with BSF security, organized seating, no-bag zones, and full safety.' },
+    { name: 'Kesar Da Dhaba', category: 'Restaurant', safetyRating: 89, address: 'Chowk Passian, Amritsar', desc: '130-year-old legendary dhaba, FSSAI certified, very popular with tourists for authentic Punjabi food.' },
+    { name: 'Partition Museum', category: 'Attraction', safetyRating: 91, address: 'Town Hall, Amritsar', desc: 'Award-winning museum with professional security, guided tours, and international recognition.' },
+  ],
+};
+
+/**
+ * Return recommended safe places for any selected location.
+ * Matches by city name (case-insensitive).
+ * Falls back to nearest known city if not found.
+ */
+export function getRecommendationsForLocation(location: Location): CityPlace[] {
+  const city = location.city?.toLowerCase().trim() || '';
+
+  // Direct match
+  for (const [key, places] of Object.entries(CITY_RECOMMENDATIONS)) {
+    if (city.includes(key) || key.includes(city)) {
+      return places;
+    }
+  }
+
+  // State-based fallback
+  const state = location.state?.toLowerCase() || '';
+  if (state.includes('tamil')) return CITY_RECOMMENDATIONS['chennai'];
+  if (state.includes('andhra') || state.includes('ap')) return CITY_RECOMMENDATIONS['nellore'];
+  if (state.includes('telangana')) return CITY_RECOMMENDATIONS['hyderabad'];
+  if (state.includes('karnataka')) return CITY_RECOMMENDATIONS['bengaluru'];
+  if (state.includes('maharashtra')) return CITY_RECOMMENDATIONS['mumbai'];
+  if (state.includes('goa')) return CITY_RECOMMENDATIONS['goa'];
+  if (state.includes('rajasthan')) return CITY_RECOMMENDATIONS['jaipur'];
+  if (state.includes('kerala')) return CITY_RECOMMENDATIONS['kochi'];
+  if (state.includes('west bengal')) return CITY_RECOMMENDATIONS['kolkata'];
+  if (state.includes('punjab')) return CITY_RECOMMENDATIONS['amritsar'];
+  if (state.includes('uttar pradesh') || state.includes('up')) return CITY_RECOMMENDATIONS['agra'];
+
+  // Default fallback
+  return CITY_RECOMMENDATIONS['chennai'];
+}
+
