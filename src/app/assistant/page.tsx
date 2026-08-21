@@ -178,7 +178,7 @@ export default function AssistantPage() {
     // Simulate interactive reasoning delay
     await new Promise(r => setTimeout(r, 600));
 
-    const replyText = generateInteractiveAIResponse(text, currentLocation, places, contacts);
+    const replyText = generateInteractiveAIResponse(text, currentLocation, places, contacts, messages);
 
     const assistantMsg: Message = {
       id: (Date.now() + 1).toString(),
