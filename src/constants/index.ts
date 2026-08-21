@@ -194,7 +194,7 @@ export const TOURIST_NAV_ITEMS = [
   { label: 'Safety Map', href: '/map', icon: 'map' },
   { label: 'Alerts', href: '/alerts', icon: 'bell' },
   { label: 'Safe Routes', href: '/routes', icon: 'navigation' },
-  { label: 'Community', href: '/community', icon: 'message-circle' },
+  { label: 'AI Assistant', href: '/assistant', icon: 'bot' },
   { label: 'Report Incident', href: '/report', icon: 'flag' },
   { label: 'Emergency', href: '/emergency', icon: 'phone' },
   { label: 'My Trip', href: '/itinerary', icon: 'calendar' },

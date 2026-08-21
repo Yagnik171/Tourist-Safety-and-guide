@@ -144,7 +144,7 @@ export default function DashboardPage() {
               </Link>
 
               <Link
-                href="/community"
+                href="/assistant"
                 className="bg-slate-900/70 border border-slate-800 hover:border-cyan-500/40 p-5 rounded-2xl group transition-all shadow-lg"
               >
                 <div className="flex items-center justify-between mb-3">
@@ -152,12 +152,12 @@ export default function DashboardPage() {
                     <MessageCircle className="w-5 h-5" />
                   </div>
                   <span className="text-xs font-bold text-blue-400 flex items-center gap-1">
-                    Join Feed <ArrowRight className="w-3.5 h-3.5" />
+                    Ask AI <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
-                <h4 className="text-base font-bold text-white mb-1">Local Tourist Community</h4>
+                <h4 className="text-base font-bold text-white mb-1">AI Travel Assistant</h4>
                 <p className="text-xs text-slate-400">
-                  Ask verified travelers about crowds, scams, and safest dining spots in {currentLocation.name}.
+                  Ask SafeWander AI about safe spots, hotels, transport, and travel tips in {currentLocation.name}.
                 </p>
               </Link>
 

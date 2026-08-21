@@ -21,6 +21,7 @@ import {
   BarChart,
   Users,
   MapPin,
+  Bot,
 } from 'lucide-react';
 import { TOURIST_NAV_ITEMS, ADMIN_NAV_ITEMS } from '@/constants';
 import { useAppStore } from '@/lib/store';
@@ -38,6 +39,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   bell: Bell,
   navigation: Navigation,
   'message-circle': MessageCircle,
+  bot: Bot,
   flag: Flag,
   phone: Phone,
   calendar: Calendar,
