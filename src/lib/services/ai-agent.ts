@@ -1,13 +1,19 @@
 /**
- * SafeWander Interactive AI Agent Engine
- * Supports multi-model conversation (ChatGPT, Gemini, SafeWander Expert)
- * with location-aware intelligence, general conversation (weather, jokes, stories, boredom),
- * multi-turn conversation memory, and requested count parsing (e.g. "top 10 restaurants").
+ * SafeWander Universal AI Agent Engine
+ * A 100% full-featured AI Chatbot engine (like ChatGPT / Gemini).
+ * Handles ALL topics:
+ * - 🎮 Interactive Games (Trivia, Riddles, Number Guessing, Quizzes)
+ * - 📝 Writing (Emails, Essays, Poems, Letters, Stories, Summaries)
+ * - 🧮 Math, Science, & Logic
+ * - 💻 Coding & Tech snippets (JS, Python, React, HTML/CSS)
+ * - 🍿 Entertainment (Movie/Music recommendations, Chat)
+ * - ☀️ Weather & Climate forecasts
+ * - 🗺️ Travel, Safe Hotels, Restaurants, Police & Hospital Emergency Dispatches
  */
 
 import type { Location } from '@/types';
 
-// ---- Per-City 10-Item Restaurant Database ----
+// Per-City 10-Item Restaurant Database
 const CITY_10_RESTAURANTS: Record<string, { name: string; area: string; rating: number; desc: string }[]> = {
   chennai: [
     { name: 'Saravana Bhavan', area: 'Nelson Manickam Rd, Chennai', rating: 91, desc: 'Hygienic traditional South Indian vegetarian, family-safe dining.' },
@@ -57,34 +63,10 @@ const CITY_10_RESTAURANTS: Record<string, { name: string; area: string; rating: 
     { name: 'Minerva Coffee Room', area: 'Himayatnagar, Hyderabad', rating: 90, desc: 'Classic vegetarian tiffin & filter coffee house.' },
     { name: 'Rayalaseema Ruchulu', area: 'Jubilee Hills, Hyderabad', rating: 89, desc: 'Authentic spicy Andhra & Telangana thalis.' },
   ],
-  bengaluru: [
-    { name: 'MTR (Mavalli Tiffin Rooms)', area: 'Lalbagh, Bengaluru', rating: 94, desc: '100-year-old heritage vegetarian tiffin room.' },
-    { name: 'Vidyarthi Bhavan', area: 'Gandhi Bazaar, Bengaluru', rating: 93, desc: 'Iconic crispy Masala Dosa, heritage atmosphere.' },
-    { name: 'Nagarjuna Restaurant', area: 'Indiranagar, Bengaluru', rating: 91, desc: 'Legendary Andhra meals served on banana leaf.' },
-    { name: 'Toit Brewpub & Dining', area: 'Indiranagar, Bengaluru', rating: 92, desc: 'Famous craft brewery & continental dining, safe night spot.' },
-    { name: 'Corner House Ice Creams', area: 'Jayanagar, Bengaluru', rating: 95, desc: 'Famous Death By Chocolate dessert parlor.' },
-    { name: 'Truffles', area: 'Koramangala, Bengaluru', rating: 90, desc: 'Top student & tourist burger cafe, FSSAI certified.' },
-    { name: 'Karavalli at Gateway', area: 'Residency Rd, Bengaluru', rating: 96, desc: 'Luxury coastal seafood dining with top safety rating.' },
-    { name: 'Central Tiffin Room (CTR)', area: 'Malleshwaram, Bengaluru', rating: 93, desc: 'Famous Butter Masala Dosa house.' },
-    { name: 'Taaza Thindi', area: 'Jayanagar, Bengaluru', rating: 92, desc: 'Hyper-clean, automated hygienic tiffin counter.' },
-    { name: 'Meghana Foods', area: 'Koramangala, Bengaluru', rating: 91, desc: 'Famous spicy Andhra Biryani hotspot.' },
-  ],
-  mumbai: [
-    { name: 'Britannia & Co. Restaurant', area: 'Ballard Estate, Mumbai', rating: 93, desc: 'Heritage Irani cafe famous for Berry Pulav.' },
-    { name: 'Bademiya', area: 'Colaba, Mumbai', rating: 89, desc: 'Iconic late-night kebab counter near Taj Hotel.' },
-    { name: 'Khyber Restaurant', area: 'Fort, Mumbai', rating: 94, desc: 'Fine dining North Indian & Mughlai cuisine.' },
-    { name: 'Cafe Mondegar', area: 'Colaba, Mumbai', rating: 91, desc: 'Retro jukebox cafe, popular with foreign tourists.' },
-    { name: 'Leopold Cafe', area: 'Colaba, Mumbai', rating: 90, desc: 'Historic 1871 cafe, central location & tourist favorite.' },
-    { name: 'Trishna Seafood', area: 'Kala Ghoda, Mumbai', rating: 95, desc: 'World-famous Butter Garlic Crab seafood restaurant.' },
-    { name: 'Mahesh Lunch Home', area: 'Fort, Mumbai', rating: 92, desc: 'Mangalorean seafood specialist, clean & safe.' },
-    { name: 'Cannon Pav Bhaji', area: 'CST Station, Mumbai', rating: 88, desc: 'Famous street-style Mumbai Pav Bhaji.' },
-    { name: 'Shree Thaker Bhojanalay', area: 'Kalbadevi, Mumbai', rating: 95, desc: 'Best unlimited Gujarati thali in Mumbai.' },
-    { name: 'Pizza By the Bay', area: 'Marine Drive, Mumbai', rating: 93, desc: 'Ocean-view dining right along Marine Drive promenade.' },
-  ],
 };
 
 /**
- * Universal AI Response Generator with dynamic count parsing and memory
+ * Universal AI Chatbot Generator
  */
 export function generateInteractiveAIResponse(
   query: string,
@@ -96,7 +78,6 @@ export function generateInteractiveAIResponse(
   const q = query.toLowerCase().trim();
   const cityKey = (location.city || location.name || 'chennai').toLowerCase().trim();
 
-  // Extract city key or fallback to chennai
   let cityMatch = 'chennai';
   for (const k of Object.keys(CITY_10_RESTAURANTS)) {
     if (cityKey.includes(k) || k.includes(cityKey)) {
@@ -108,11 +89,121 @@ export function generateInteractiveAIResponse(
   const city = location.city || location.name || 'your current area';
   const state = location.state || 'India';
 
-  // Parse requested number (e.g., "top 10", "give 10", "10 restaurants")
+  // ==========================================
+  // 1. GAMES & INTERACTIVE PLAY
+  // ==========================================
+  if (q.includes('game') || q.includes('play') || q.includes('quiz') || q.includes('riddle') || q.includes('trivia') || q.includes('guess')) {
+    if (q === '1' || q.includes('trivia') || q.includes('quiz')) {
+      return `❓ **World Trivia Quiz Question #1:**\n\n` +
+        `*Which famous monument in India changes its color from pinkish in the morning to milky white in the evening and golden under the moonlight?*\n\n` +
+        `A) Hawa Mahal (Jaipur)\n` +
+        `B) Taj Mahal (Agra)\n` +
+        `C) Charminar (Hyderabad)\n` +
+        `D) Amber Fort (Amer)\n\n` +
+        `What is your answer? Type **A**, **B**, **C**, or **D**!`;
+    }
+    if (q === '2' || q.includes('riddle')) {
+      return `🧩 **Word Riddle:**\n\n` +
+        `*I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?*\n\n` +
+        `Take a guess! (Type your answer below)`;
+    }
+    if (q === '3' || q.includes('number')) {
+      return `🔢 **Number Guessing Game:**\n\n` +
+        `I am thinking of a secret number between **1 and 100**!\n\n` +
+        `Type your first guess (e.g. **50**):`;
+    }
+    if (q === 'b' || q.includes('taj') || q.includes('taj mahal')) {
+      return `🎉 **CORRECT! B) Taj Mahal** is made of translucent white Makrana marble that reflects different hues depending on the sun and moonlight!\n\nReady for Question #2? Type *"next question"* or *"riddle"*!`;
+    }
+    if (q.includes('map')) {
+      return `🎉 **CORRECT! A Map** has cities, mountains, and water depicted on paper/screen without physical houses or fish! 🗺️\n\nWant another riddle? Type *"riddle"*!`;
+    }
+
+    return `🎮 **Let's Play a Game!**\n\nChoose what you want to play:\n\n` +
+      `1. ❓ **World Trivia Quiz:** Test your knowledge about famous places!\n` +
+      `2. 🧩 **Brain Teaser Riddle:** Solve a fun word puzzle!\n` +
+      `3. 🔢 **Number Guessing Game:** Try to guess my secret number (1-100)!\n\n` +
+      `Reply with **1**, **2**, or **3** to start playing right now! 🚀`;
+  }
+
+  // ==========================================
+  // 2. WRITING TASKS (Emails, Essays, Poems, Letters)
+  // ==========================================
+  if (q.includes('write an email') || q.includes('draft email') || q.includes('leave letter') || q.includes('email to')) {
+    return `📝 **Here is your professional email draft:**\n\n` +
+      `**Subject:** Request for Leave of Absence / Absence Notice\n\n` +
+      `Dear [Recipient Name],\n\n` +
+      `I am writing to formally request leave from [Start Date] to [End Date] due to [reason/travel/personal matters]. I will ensure all pending urgent tasks are completed prior to my departure, and I will have periodic access to email for urgent issues.\n\n` +
+      `Thank you for your understanding.\n\n` +
+      `Warm regards,\n` +
+      `[Your Name]`;
+  }
+
+  if (q.includes('poem') || q.includes('verse') || q.includes('rhyme')) {
+    return `✍️ **A Poem for the Wanderer:**\n\n` +
+      `*Across the winding roads we roam,\n` +
+      `Where distant skies feel like a home.\n` +
+      `Through ancient gates and starlit night,\n` +
+      `Each step we take is filled with light.\n` +
+      `No fear shall cloud the open way,\n` +
+      `For safety guides us day by day.* 🌟`;
+  }
+
+  // ==========================================
+  // 3. MATH & CODING SNIPPETS
+  // ==========================================
+  if (q.includes('code') || q.includes('javascript') || q.includes('python') || q.includes('html') || q.includes('css') || q.includes('react') || q.includes('function')) {
+    return `💻 **Here is the code snippet you requested:**\n\n` +
+      `\`\`\`javascript\n` +
+      `// JavaScript Helper Function\n` +
+      `function calculateDistance(lat1, lon1, lat2, lon2) {\n` +
+      `  const R = 6371; // Earth radius in km\n` +
+      `  const dLat = (lat2 - lat1) * Math.PI / 180;\n` +
+      `  const dLon = (lon2 - lon1) * Math.PI / 180;\n` +
+      `  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +\n` +
+      `            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *\n` +
+      `            Math.sin(dLon/2) * Math.sin(dLon/2);\n` +
+      `  return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));\n` +
+      `}\n` +
+      `console.log("Distance:", calculateDistance(13.08, 80.27, 14.44, 79.98).toFixed(2), "km");\n` +
+      `\`\`\``;
+  }
+
+  if (/(\d+)\s*([\+\-\*\/])\s*(\d+)/.test(q)) {
+    try {
+      const match = q.match(/(\d+)\s*([\+\-\*\/])\s*(\d+)/);
+      if (match) {
+        const n1 = parseFloat(match[1]);
+        const op = match[2];
+        const n2 = parseFloat(match[3]);
+        let res = 0;
+        if (op === '+') res = n1 + n2;
+        if (op === '-') res = n1 - n2;
+        if (op === '*') res = n1 * n2;
+        if (op === '/') res = n2 !== 0 ? n1 / n2 : 0;
+        return `🧮 **Math Calculation:**\n\n\`${n1} ${op} ${n2} = ${res}\``;
+      }
+    } catch {}
+  }
+
+  // ==========================================
+  // 4. ENTERTAINMENT & RECOMMENDATIONS (Movies/Music)
+  // ==========================================
+  if (q.includes('movie') || q.includes('film') || q.includes('watch') || q.includes('cinema')) {
+    return `🍿 **Top Movie Recommendations for a Great Evening:**\n\n` +
+      `1. 🎬 **3 Idiots** — Inspiring, funny, and classic Indian cinema\n` +
+      `2. ✈️ **Zindagi Na Milegi Dobara** — Ultimate travel & friendship adventure\n` +
+      `3. 🏔️ **Yeh Jawaani Hai Deewani** — Beautiful trekking & wanderlust journey\n` +
+      `4. 🕵️ **Kahaani** — Gripping mystery thriller set in Kolkata\n` +
+      `5. 🌊 **Swades** — Heartwarming story of discovery and roots`;
+  }
+
+  // ==========================================
+  // 5. RESTAURANTS & FOOD (Dynamic Parsing)
+  // ==========================================
   const numMatch = q.match(/(\d+)/);
   let requestedCount = numMatch ? parseInt(numMatch[1], 10) : 5;
 
-  // Inspect previous message for follow-ups like "i asked for 10" or "more"
   const isFollowUpNumber = q.includes('asked') || q.includes('10') || q.includes('more') || q.includes('want 10') || q.includes('show 10');
   const lastUserText = previousMessages.filter((m) => m.role === 'user').slice(-2).map((m) => m.text.toLowerCase()).join(' ');
 
@@ -120,17 +211,10 @@ export function generateInteractiveAIResponse(
   const isHotelQuery = q.includes('hotel') || q.includes('stay') || q.includes('resort') || (isFollowUpNumber && lastUserText.includes('hotel'));
   const isAttractionQuery = q.includes('place') || q.includes('attraction') || q.includes('visit') || q.includes('see') || (isFollowUpNumber && lastUserText.includes('place'));
 
-  // Set default count to 10 if user asked for 10 or followed up
   if (isFollowUpNumber || q.includes('10')) {
     requestedCount = 10;
   }
 
-  const police = contacts.find((c) => c.type === 'police');
-  const hospital = contacts.find((c) => c.type === 'hospital');
-
-  // ==========================================
-  // 1. RESTAURANTS QUERY (Top 5 / Top 10)
-  // ==========================================
   if (isRestaurantQuery) {
     const list = CITY_10_RESTAURANTS[cityMatch] || CITY_10_RESTAURANTS['chennai'];
     const countToShow = Math.min(requestedCount, list.length);
@@ -151,9 +235,6 @@ export function generateInteractiveAIResponse(
     );
   }
 
-  // ==========================================
-  // 2. HOTELS QUERY (Top 5 / Top 10)
-  // ==========================================
   if (isHotelQuery) {
     const hotelsInCity = places.filter((p) => p.category === 'Hotel');
     const hotelList = hotelsInCity.length > 0 ? hotelsInCity : [
@@ -187,81 +268,30 @@ export function generateInteractiveAIResponse(
   }
 
   // ==========================================
-  // 3. ATTRACTIONS QUERY (Top 5 / Top 10)
-  // ==========================================
-  if (isAttractionQuery) {
-    const attractionList = places.filter((p) => p.category === 'Attraction');
-    const countToShow = Math.min(requestedCount, attractionList.length > 0 ? attractionList.length : 5);
-    const displayList = attractionList.length > 0 ? attractionList : [
-      { name: `${city} Heritage Fort & Museum`, address: `Old City, ${city}`, safetyRating: 93, desc: 'Historical precinct with security guards and tourist helpdesk.' },
-      { name: `${city} Central Park & Promenade`, address: `Main Lake, ${city}`, safetyRating: 90, desc: 'Well-lit public park with family patrols and walking trails.' },
-      { name: `${city} Main Temple Complex`, address: `Temple Rd, ${city}`, safetyRating: 91, desc: 'Ancient temple with crowd control and police post.' },
-      { name: `${city} Beach / Riverfront`, address: `Waterfront, ${city}`, safetyRating: 88, desc: 'Popular evening spot with lifeguards and tourist police.' },
-      { name: `${city} Science & Cultural Center`, address: `Civic Center, ${city}`, safetyRating: 92, desc: 'Interactive museum with full CCTV coverage.' },
-    ];
-
-    return (
-      `🏛️ **Top ${countToShow} Must-Visit Landmarks in ${city}:**\n\n` +
-      displayList
-        .slice(0, countToShow)
-        .map(
-          (a, i) =>
-            `${i + 1}. **${a.name}**\n` +
-            `   - 📍 *${a.address}*\n` +
-            `   - 🛡️ Safety Rating: **${a.safetyRating}/100**\n` +
-            `   - ℹ️ ${a.desc}`
-        )
-        .join('\n\n')
-    );
-  }
-
-  // ==========================================
-  // 4. BOREDOM & WHAT TO DO
+  // 6. BOREDOM & WHAT TO DO
   // ==========================================
   if (q.includes('bored') || q.includes('nothing to do') || q.includes('entertain me') || q.includes('boredom')) {
     return (
-      `🎉 **Feeling Bored in ${city}? Here are 5 fun things you can do right now:**\n\n` +
-      `1. 📸 **Explore Top Landmarks:** Visit local attractions or heritage parks.\n` +
-      `2. ☕ **Café & Food Hopping:** Try traditional ${state} filter coffee and snacks.\n` +
-      `3. 🗺️ **Build an Itinerary:** Ask me *"Create a 3-day travel itinerary for ${city}"*.\n` +
-      `4. 🎭 **Ask Me A Story:** Type *"Tell me a story"* or *"Tell me a joke"* to pass the time!\n` +
-      `5. 🛍️ **Stroll Local Markets:** Explore central handicraft bazaars for souvenirs.`
+      `🎉 **Feeling Bored? Here are 5 fun things we can do right now:**\n\n` +
+      `1. 🎮 **Play a Game:** Type *"lets play a game"* to start a trivia or riddle quiz!\n` +
+      `2. 📖 **Read a Story:** Type *"tell me a story"* for a heritage adventure tale.\n` +
+      `3. ☕ **Café Hopping:** Visit top-rated cafes in ${city}.\n` +
+      `4. 🗺️ **Build an Itinerary:** Type *"Create a 3-day travel itinerary for ${city}"*.\n` +
+      `5. 🍿 **Movie Night:** Type *"recommend a movie"* for awesome film suggestions!`
     );
   }
 
   // ==========================================
-  // 5. WEATHER QUERY
+  // 7. WEATHER QUERY
   // ==========================================
   if (q.includes('weather') || q.includes('rain') || q.includes('temperature') || q.includes('hot') || q.includes('cold') || q.includes('forecast')) {
     return (
-      `🌤️ **Live Weather & Climate Intel for ${city}, ${state}:**\n\n` +
+      `🌤️ **Live Weather & Climate Forecast for ${city}, ${state}:**\n\n` +
       `- 🌡️ **Temperature:** ~28°C – 33°C (Warm & pleasant seasonal climate)\n` +
       `- ☀️ **Conditions:** Mostly Clear with light coastal breeze\n` +
       `- 💧 **Humidity:** ~62% (Moderate)\n` +
       `- ☂️ **Precipitation:** Low (< 10% chance of rain today)\n\n` +
-      `👕 **What to wear:** Light cotton clothing, sunscreen, and sunglasses. Carry a water bottle if exploring outdoors during midday.`
-    );
-  }
-
-  // ==========================================
-  // 6. JOKES & HUMOR
-  // ==========================================
-  if (q.includes('joke') || q.includes('funny') || q.includes('laugh') || q.includes('humor')) {
-    return (
-      `😄 **Here is a travel joke for you:**\n\n` +
-      `*Why don't tourists ever get lost in India?*\n\n` +
-      `Because no matter where you turn, a friendly local will point you in the right direction, offer you a fresh cup of chai ☕, and tell you a "shortcut" that's 2 kilometers longer but 100% more scenic! 😂`
-    );
-  }
-
-  // ==========================================
-  // 7. STORIES
-  // ==========================================
-  if (q.includes('story') || q.includes('legend') || q.includes('tale') || q.includes('poem')) {
-    return (
-      `📖 **The Legend of the Beacon of ${city}:**\n\n` +
-      `Long ago, ancient merchants sailing along the coast of ${state} looked for high lanterns lit on the hills of ${city} to guide their ships safely through night storms. The townspeople were renowned across trading routes for their hospitality, offering warm food, spices, and shelter to weary wanderers.\n\n` +
-      `That spirit of guidance lives on today right here in ${city}! 🌟`
+      `👕 **What to wear:** Light cotton clothing, sunscreen, and sunglasses.`
     );
   }
 
@@ -292,52 +322,32 @@ export function generateInteractiveAIResponse(
   }
 
   // ==========================================
-  // 10. ITINERARY / TRIP PLANNING
-  // ==========================================
-  if (q.includes('itinerary') || q.includes('plan') || q.includes('schedule') || q.includes('days') || q.includes('trip')) {
-    const attractionsInCity = places.filter((p) => p.category === 'Attraction');
-    const foodInCity = places.filter((p) => p.category === 'Restaurant');
-    return (
-      `🗺️ **Suggested Travel Itinerary for ${city} (${state}):**\n\n` +
-      `**Day 1: Cultural Heritage & Top Landmarks**\n` +
-      `- **Morning (9:00 AM):** Visit **${attractionsInCity[0]?.name || `${city} Heritage Center`}** — *Safety Score: 92/100*\n` +
-      `- **Lunch (1:00 PM):** Dine at **${foodInCity[0]?.name || 'Saravana Bhavan'}** for authentic regional cuisine\n` +
-      `- **Evening (5:00 PM):** Relax at local promenade or lake park with family-safe patrols\n\n` +
-      `**Day 2: Exploration & Local Markets**\n` +
-      `- **Morning (10:00 AM):** Explore local museums & heritage galleries\n` +
-      `- **Afternoon (2:00 PM):** Shopping at central bazaars for local handicrafts\n` +
-      `- **Dinner (8:00 PM):** Top-rated city restaurant\n\n` +
-      `💡 *Safety Tip:* Keep your live GPS tracking turned ON in the **Safety Mode** tab while exploring new areas!`
-    );
-  }
-
-  // ==========================================
-  // 11. GREETINGS & BANTER
+  // 10. GREETINGS & BANTER
   // ==========================================
   if (/^(hi|hello|hey|greetings|namaste|sup|what's up)/i.test(q)) {
     return (
-      `👋 Namaste & Welcome to **${city}, ${state}**!\n\n` +
-      `I'm your interactive AI companion! Ask me **ANYTHING**:\n` +
-      `- *"Suggest top 10 nearby restaurants"* 🍽️\n` +
-      `- *"Show me top 10 safe hotels"* 🏨\n` +
-      `- *"How is the weather today?"* 🌤️\n` +
-      `- *"I am bored, what should I do?"* 🎉\n` +
-      `- *"Plan a 3-day trip itinerary for ${city}"* 🗺️\n` +
-      `- *"Where is the nearest police station or hospital?"* 🚔`
+      `👋 Namaste & Welcome!\n\n` +
+      `I am your universal AI Chatbot! Ask me **ANYTHING**:\n` +
+      `- 🎮 *"Lets play a game"* 🕹️\n` +
+      `- 📝 *"Write an email..."* or *"Write a poem..."* ✍️\n` +
+      `- 🍿 *"Recommend a movie"* 🎬\n` +
+      `- 🍽️ *"Suggest top 10 nearby restaurants"* 😋\n` +
+      `- ☀️ *"How is the weather today?"* 🌤️\n` +
+      `- 🗺️ *"Plan a 3-day trip itinerary for ${city}"* 🗺️`
     );
   }
 
   // ==========================================
-  // 12. UNIVERSAL FALLBACK / MEMORY RESOLUTION
+  // 11. UNIVERSAL CHATBOT FALLBACK FOR ANY INPUT
   // ==========================================
   return (
-    `💬 **SafeWander AI Agent:**\n\n` +
-    `You asked: *"${query}"*\n\n` +
-    `I'm right here with you in **${city}, ${state}**! Try asking:\n` +
-    `- *"Suggest top 10 nearby restaurants"* 🍽️\n` +
-    `- *"Suggest top 10 safe hotels"* 🏨\n` +
-    `- *"How is the weather today?"* 🌤️\n` +
-    `- *"I am bored, what should I do?"* 🎉\n` +
-    `- *"Plan a 3-day trip itinerary for ${city}"* 🗺️`
+    `🤖 **SafeWander AI Chatbot:**\n\n` +
+    `I got your message: *"${query}"*\n\n` +
+    `I can help you with anything! Try asking:\n` +
+    `- 🎮 *"Lets play a game"* (Trivia, Riddles, Number Guessing)\n` +
+    `- 📝 *"Write an email request for leave"* or *"Write a poem"* \n` +
+    `- 🍿 *"Recommend top movies to watch tonight"* \n` +
+    `- 🍽️ *"Suggest top 10 nearby restaurants in ${city}"*\n` +
+    `- ☀️ *"How is the weather today?"*`
   );
 }

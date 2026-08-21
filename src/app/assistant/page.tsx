@@ -45,13 +45,13 @@ const MODEL_OPTIONS = [
 ];
 
 const PRESET_TOPICS = [
+  { label: '🎮 Lets play a game', prompt: 'lets play a game' },
+  { label: '📝 Write an email', prompt: 'write an email to my manager for leave request' },
+  { label: '🍿 Recommend a movie', prompt: 'recommend top movies to watch tonight' },
+  { label: '🍽️ Top 10 Restaurants', prompt: 'suggest top 10 nearby restaurants' },
   { label: '☀️ How is the weather today?', prompt: 'How is the weather today?' },
-  { label: '🎉 I am bored, what should I do?', prompt: 'I am bored, what should I do right now?' },
-  { label: '😄 Tell me a joke', prompt: 'Tell me a funny joke!' },
-  { label: '📖 Tell me a story', prompt: 'Tell me a short story' },
   { label: '🗺️ 3-Day Trip Itinerary', prompt: 'Create a 3-day travel itinerary for me with timings' },
-  { label: '🏨 Safe Hotels & Stay', prompt: 'What are the top-rated safe hotels nearby?' },
-  { label: '🍽️ Food & Restaurants', prompt: 'Recommend hygienic local food and top restaurants' },
+  { label: '🏨 Top 10 Safe Hotels', prompt: 'What are the top 10 safe hotels nearby?' },
   { label: '🚔 Emergency Responders', prompt: 'Give me the nearest police station and hospital contacts' },
 ];
 
