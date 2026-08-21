@@ -45,12 +45,14 @@ const MODEL_OPTIONS = [
 ];
 
 const PRESET_TOPICS = [
+  { label: '☀️ How is the weather today?', prompt: 'How is the weather today?' },
+  { label: '🎉 I am bored, what should I do?', prompt: 'I am bored, what should I do right now?' },
+  { label: '😄 Tell me a joke', prompt: 'Tell me a funny joke!' },
+  { label: '📖 Tell me a story', prompt: 'Tell me a short story' },
   { label: '🗺️ 3-Day Trip Itinerary', prompt: 'Create a 3-day travel itinerary for me with timings' },
   { label: '🏨 Safe Hotels & Stay', prompt: 'What are the top-rated safe hotels nearby?' },
   { label: '🍽️ Food & Restaurants', prompt: 'Recommend hygienic local food and top restaurants' },
   { label: '🚔 Emergency Responders', prompt: 'Give me the nearest police station and hospital contacts' },
-  { label: '🚗 Transport & Cabs', prompt: 'How can I travel around safely at night?' },
-  { label: '☀️ Weather & Climate', prompt: 'What is the current weather and safety advice?' },
 ];
 
 export default function AssistantPage() {
