@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { AlertTriangle, CloudRain, ShieldAlert, Activity, Flame, Shield } from 'lucide-react';
 import type { SafetyAlert } from '@/types';
 import { formatRelativeTime, cn } from '@/lib/utils';
@@ -16,6 +16,12 @@ export const AlertCard: React.FC<AlertCardProps> = ({
   onViewOnMap,
   className,
 }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const typeIcons = {
     weather: CloudRain,
     crime: ShieldAlert,
@@ -65,7 +71,9 @@ export const AlertCard: React.FC<AlertCardProps> = ({
       </div>
 
       <div className="flex items-center justify-between pt-2 border-t border-slate-800/60 text-[11px] text-slate-400">
-        <span>{alert.location?.name || 'Chennai'} • {formatRelativeTime(alert.created_at)}</span>
+        <span suppressHydrationWarning>
+          {alert.location?.name || 'Chennai'} • {isMounted ? formatRelativeTime(alert.created_at) : 'Recent'}
+        </span>
         {onViewOnMap && (
           <button
             onClick={onViewOnMap}
