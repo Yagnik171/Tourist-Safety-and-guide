@@ -110,13 +110,15 @@ const TEST_PROMPTS = [
   'car rental in goa',
   'night safety tips in delhi',
 
-  // --- 10. General Chat, Entertainment, Math & Coding (10) ---
+  // --- 10. General Chat, Entertainment, Math & Coding (12) ---
   'hi',
   'how are you',
   'i am bored',
   'recommend a movie',
   'what is 25 * 4',
   'write javascript code',
+  'write fibanacci code',
+  'java code',
   'what can you do',
   'tell me a joke',
   'who created you',

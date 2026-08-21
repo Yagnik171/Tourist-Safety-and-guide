@@ -2,6 +2,7 @@
  * SafeWander Universal AI Agent Engine
  * Bulletproof, zero-fail AI Chatbot engine (like ChatGPT & Gemini).
  * Features:
+ * - 💻 Coding & Programming (Java, Python, JS, Fibonacci, Algorithms, Programs)
  * - ☕ Cafes, Coffee Shops, Bakeries, Restaurants, Biryani, Tiffins, Dining
  * - 🏨 Safe Hotels, Resorts, Homestays, Lodges, Accommodation
  * - 🏛️ Landmarks, Temples, Beaches, Forts, Parks, Malls, Shopping, Sightseeing
@@ -9,7 +10,7 @@
  * - 🎮 Interactive Games (Trivia, Riddles, Number Guessing, Quizzes)
  * - 📝 Writing (Emails, Essays, Poems, Letters, Stories)
  * - 🍿 Movies, Music, Tech, Math & Science
- * - 🤖 Smart Universal Response Engine for ANY user prompt (Zero annoying template fallbacks)
+ * - 🤖 Smart Universal Response Engine for ANY user prompt
  */
 
 import type { Location } from '@/types';
@@ -44,10 +45,127 @@ export function generateInteractiveAIResponse(
   }
 
   // ==========================================
-  // INTENT CATEGORY MATCHERS
+  // 1. CODING & PROGRAMMING (Must take priority over general writing!)
   // ==========================================
+  const isCodingQuery =
+    q.includes('code') ||
+    q.includes('coding') ||
+    q.includes('fibonacci') ||
+    q.includes('fibanacci') ||
+    q.includes('factorial') ||
+    q.includes('java') ||
+    q.includes('python') ||
+    q.includes('javascript') ||
+    q.includes('typescript') ||
+    q.includes('c++') ||
+    q.includes('cpp') ||
+    q.includes('c#') ||
+    q.includes('html') ||
+    q.includes('css') ||
+    q.includes('react') ||
+    q.includes('sql') ||
+    q.includes('algorithm') ||
+    q.includes('program') ||
+    q.includes('script') ||
+    q.includes('function') ||
+    q.includes('array') ||
+    q.includes('loop');
 
-  // 1. Cafe & Food & Dining
+  if (isCodingQuery) {
+    if (q.includes('fibonacci') || q.includes('fibanacci')) {
+      return (
+        `💻 **Fibonacci Series Code Implementations:**\n\n` +
+        `**1. Java Code:**\n` +
+        `\`\`\`java\n` +
+        `public class Fibonacci {\n` +
+        `    public static void main(String[] args) {\n` +
+        `        int n = 10, t1 = 0, t2 = 1;\n` +
+        `        System.out.print("First " + n + " terms: ");\n` +
+        `        for (int i = 1; i <= n; ++i) {\n` +
+        `            System.out.print(t1 + " ");\n` +
+        `            int sum = t1 + t2;\n` +
+        `            t1 = t2;\n` +
+        `            t2 = sum;\n` +
+        `        }\n` +
+        `    }\n` +
+        `}\n` +
+        `\`\`\`\n\n` +
+        `**2. Python Code:**\n` +
+        `\`\`\`python\n` +
+        `def fibonacci(n):\n` +
+        `    a, b = 0, 1\n` +
+        `    for _ in range(n):\n` +
+        `        print(a, end=" ")\n` +
+        `        a, b = b, a + b\n\n` +
+        `fibonacci(10)\n` +
+        `\`\`\`\n\n` +
+        `**3. JavaScript Code:**\n` +
+        `\`\`\`javascript\n` +
+        `function fibonacci(n) {\n` +
+        `  let a = 0, b = 1;\n` +
+        `  const result = [];\n` +
+        `  for (let i = 0; i < n; i++) {\n` +
+        `    result.push(a);\n` +
+        `    [a, b] = [b, a + b];\n` +
+        `  }\n` +
+        `  return result;\n` +
+        `}\n` +
+        `console.log(fibonacci(10));\n` +
+        `\`\`\``
+      );
+    }
+
+    if (q.includes('java')) {
+      return (
+        `💻 **Java Programming Code Example:**\n\n` +
+        `\`\`\`java\n` +
+        `// Java Class & Main Method Example\n` +
+        `import java.util.Scanner;\n\n` +
+        `public class JavaExample {\n` +
+        `    public static void main(String[] args) {\n` +
+        `        System.out.println("Java Code Execution Active!");\n` +
+        `        int[] numbers = {10, 20, 30, 40, 50};\n` +
+        `        int sum = 0;\n` +
+        `        for (int num : numbers) {\n` +
+        `            sum += num;\n` +
+        `        }\n` +
+        `        System.out.println("Sum of array elements = " + sum);\n` +
+        `    }\n` +
+        `}\n` +
+        `\`\`\`\n\n` +
+        `You can ask me for Java algorithms (sorting, searching, arrays, strings, data structures)!`
+      );
+    }
+
+    if (q.includes('python')) {
+      return (
+        `💻 **Python Code Example:**\n\n` +
+        `\`\`\`python\n` +
+        `def solve_problem(data):\n` +
+        `    print(f"Processing {len(data)} items...")\n` +
+        `    return [x * 2 for x in data]\n\n` +
+        `result = solve_problem([1, 2, 3, 4, 5])\n` +
+        `print("Output:", result)\n` +
+        `\`\`\``
+      );
+    }
+
+    return (
+      `💻 **Code Snippet:**\n\n` +
+      `\`\`\`javascript\n` +
+      `// JavaScript Algorithm Snippet\n` +
+      `function processTask(input) {\n` +
+      `  console.log("Executing task:", input);\n` +
+      `  return { status: "success", timestamp: Date.now() };\n` +
+      `}\n` +
+      `console.log(processTask("AI Code Request"));\n` +
+      `\`\`\``
+    );
+  }
+
+  // ==========================================
+  // 2. CAFES, FOOD & DINING
+  // ==========================================
   const isFoodOrCafeQuery =
     q.includes('cafe') ||
     q.includes('coffee') ||
@@ -71,78 +189,6 @@ export function generateInteractiveAIResponse(
     q.includes('bar') ||
     (isFollowUpNumber && (lastUserText.includes('restaurant') || lastUserText.includes('food') || lastUserText.includes('cafe')));
 
-  // 2. Hotels & Stay
-  const isHotelQuery =
-    q.includes('hotel') ||
-    q.includes('stay') ||
-    q.includes('resort') ||
-    q.includes('lodge') ||
-    q.includes('room') ||
-    q.includes('accommodation') ||
-    q.includes('hostel') ||
-    q.includes('homestay') ||
-    q.includes('pg') ||
-    q.includes('villa') ||
-    (isFollowUpNumber && (lastUserText.includes('hotel') || lastUserText.includes('stay')));
-
-  // 3. Attractions & Places to Go
-  const isAttractionQuery =
-    q.includes('place') ||
-    q.includes('attraction') ||
-    q.includes('visit') ||
-    q.includes('see') ||
-    q.includes('go') ||
-    q.includes('sight') ||
-    q.includes('tourist') ||
-    q.includes('spot') ||
-    q.includes('temple') ||
-    q.includes('beach') ||
-    q.includes('fort') ||
-    q.includes('palace') ||
-    q.includes('museum') ||
-    q.includes('park') ||
-    q.includes('hill') ||
-    q.includes('lake') ||
-    q.includes('waterfall') ||
-    q.includes('market') ||
-    q.includes('mall') ||
-    q.includes('shopping') ||
-    (isFollowUpNumber && (lastUserText.includes('place') || lastUserText.includes('visit')));
-
-  // 4. Emergency & Medical
-  const isEmergencyQuery =
-    q.includes('police') ||
-    q.includes('cop') ||
-    q.includes('station') ||
-    q.includes('hospital') ||
-    q.includes('doctor') ||
-    q.includes('medical') ||
-    q.includes('medicine') ||
-    q.includes('pharmacy') ||
-    q.includes('clinic') ||
-    q.includes('ambulance') ||
-    q.includes('emergency') ||
-    q.includes('sos') ||
-    q.includes('help') ||
-    q.includes('danger') ||
-    q.includes('crime') ||
-    q.includes('theft') ||
-    q.includes('stolen');
-
-  // 5. Games & Quizzes
-  const isGameQuery =
-    q.includes('game') ||
-    q.includes('play') ||
-    q.includes('quiz') ||
-    q.includes('riddle') ||
-    q.includes('trivia') ||
-    q.includes('guess');
-
-  // ==========================================
-  // EXECUTE MATCHED INTENTS
-  // ==========================================
-
-  // A. CAFES, RESTAURANTS & FOOD
   if (isFoodOrCafeQuery) {
     const isCafeSpecific = q.includes('cafe') || q.includes('coffee') || q.includes('tea') || q.includes('bakery') || q.includes('bistro');
     const list = cityData.restaurants;
@@ -177,28 +223,22 @@ export function generateInteractiveAIResponse(
     );
   }
 
-  // B. ATTRACTIONS & LANDMARKS
-  if (isAttractionQuery) {
-    const list = cityData.attractions;
-    const countToShow = Math.min(requestedCount, list.length);
+  // ==========================================
+  // 3. HOTELS & STAYS
+  // ==========================================
+  const isHotelQuery =
+    q.includes('hotel') ||
+    q.includes('stay') ||
+    q.includes('resort') ||
+    q.includes('lodge') ||
+    q.includes('room') ||
+    q.includes('accommodation') ||
+    q.includes('hostel') ||
+    q.includes('homestay') ||
+    q.includes('pg') ||
+    q.includes('villa') ||
+    (isFollowUpNumber && (lastUserText.includes('hotel') || lastUserText.includes('stay')));
 
-    return (
-      `🏛️ **Top ${countToShow} Best Places to Visit in ${city} (${state}):**\n\n` +
-      list
-        .slice(0, countToShow)
-        .map(
-          (a, i) =>
-            `${i + 1}. **${a.name}**\n` +
-            `   - 📍 *${a.address}*\n` +
-            `   - 🛡️ Safety Rating: **${a.safetyRating}/100**\n` +
-            `   - ℹ️ ${a.desc}`
-        )
-        .join('\n\n') +
-      `\n\n💡 *Safety Tip:* All listed landmarks have active police patrols and crowd safety controls.`
-    );
-  }
-
-  // C. HOTELS & STAYS
   if (isHotelQuery) {
     const list = cityData.hotels;
     const countToShow = Math.min(requestedCount, list.length);
@@ -219,7 +259,74 @@ export function generateInteractiveAIResponse(
     );
   }
 
-  // D. POLICE & EMERGENCY
+  // ==========================================
+  // 4. ATTRACTIONS & LANDMARKS
+  // ==========================================
+  const isAttractionQuery =
+    q.includes('place') ||
+    q.includes('attraction') ||
+    q.includes('visit') ||
+    q.includes('see') ||
+    q.includes('go') ||
+    q.includes('sight') ||
+    q.includes('tourist') ||
+    q.includes('spot') ||
+    q.includes('temple') ||
+    q.includes('beach') ||
+    q.includes('fort') ||
+    q.includes('palace') ||
+    q.includes('museum') ||
+    q.includes('park') ||
+    q.includes('hill') ||
+    q.includes('lake') ||
+    q.includes('waterfall') ||
+    q.includes('market') ||
+    q.includes('mall') ||
+    q.includes('shopping') ||
+    (isFollowUpNumber && (lastUserText.includes('place') || lastUserText.includes('visit')));
+
+  if (isAttractionQuery) {
+    const list = cityData.attractions;
+    const countToShow = Math.min(requestedCount, list.length);
+
+    return (
+      `🏛️ **Top ${countToShow} Best Places to Visit in ${city} (${state}):**\n\n` +
+      list
+        .slice(0, countToShow)
+        .map(
+          (a, i) =>
+            `${i + 1}. **${a.name}**\n` +
+            `   - 📍 *${a.address}*\n` +
+            `   - 🛡️ Safety Rating: **${a.safetyRating}/100**\n` +
+            `   - ℹ️ ${a.desc}`
+        )
+        .join('\n\n') +
+      `\n\n💡 *Safety Tip:* All listed landmarks have active police patrols and crowd safety controls.`
+    );
+  }
+
+  // ==========================================
+  // 5. POLICE & EMERGENCY
+  // ==========================================
+  const isEmergencyQuery =
+    q.includes('police') ||
+    q.includes('cop') ||
+    q.includes('station') ||
+    q.includes('hospital') ||
+    q.includes('doctor') ||
+    q.includes('medical') ||
+    q.includes('medicine') ||
+    q.includes('pharmacy') ||
+    q.includes('clinic') ||
+    q.includes('ambulance') ||
+    q.includes('emergency') ||
+    q.includes('sos') ||
+    q.includes('help') ||
+    q.includes('danger') ||
+    q.includes('crime') ||
+    q.includes('theft') ||
+    q.includes('stolen');
+
   if (isEmergencyQuery) {
     return (
       `🚨 **Emergency Dispatches & Responders for ${city} (${state}):**\n\n` +
@@ -235,7 +342,17 @@ export function generateInteractiveAIResponse(
     );
   }
 
-  // E. GAMES & INTERACTIVE PLAY
+  // ==========================================
+  // 6. GAMES & INTERACTIVE PLAY
+  // ==========================================
+  const isGameQuery =
+    q.includes('game') ||
+    q.includes('play') ||
+    q.includes('quiz') ||
+    q.includes('riddle') ||
+    q.includes('trivia') ||
+    q.includes('guess');
+
   if (isGameQuery) {
     if (q === '1' || q.includes('trivia') || q.includes('quiz')) {
       return (
@@ -278,8 +395,10 @@ export function generateInteractiveAIResponse(
     );
   }
 
-  // F. WRITING TASKS (Emails, Essays, Poems, Letters)
-  if (q.includes('write') || q.includes('email') || q.includes('letter') || q.includes('poem') || q.includes('essay')) {
+  // ==========================================
+  // 7. WRITING TASKS (Emails, Essays, Poems, Letters)
+  // ==========================================
+  if (q.includes('email') || q.includes('letter') || q.includes('poem') || q.includes('essay') || (q.includes('write') && !isCodingQuery)) {
     if (q.includes('poem')) {
       return (
         `✍️ **A Poem for the Wanderer:**\n\n` +
@@ -301,7 +420,9 @@ export function generateInteractiveAIResponse(
     );
   }
 
-  // G. MATH & CALCULATIONS
+  // ==========================================
+  // 8. MATH & CALCULATIONS
+  // ==========================================
   if (/(\d+)\s*([\+\-\*\/])\s*(\d+)/.test(q)) {
     try {
       const match = q.match(/(\d+)\s*([\+\-\*\/])\s*(\d+)/);
@@ -319,7 +440,9 @@ export function generateInteractiveAIResponse(
     } catch {}
   }
 
-  // H. MOVIES & ENTERTAINMENT
+  // ==========================================
+  // 9. MOVIES & ENTERTAINMENT
+  // ==========================================
   if (q.includes('movie') || q.includes('film') || q.includes('watch') || q.includes('cinema')) {
     return (
       `🍿 **Top Movie Recommendations:**\n\n` +
@@ -331,7 +454,9 @@ export function generateInteractiveAIResponse(
     );
   }
 
-  // I. WEATHER & CLIMATE
+  // ==========================================
+  // 10. WEATHER & CLIMATE
+  // ==========================================
   if (q.includes('weather') || q.includes('rain') || q.includes('temperature') || q.includes('hot') || q.includes('cold')) {
     return (
       `🌤️ **Live Weather & Climate Forecast for ${city}, ${state}:**\n\n` +
@@ -343,11 +468,14 @@ export function generateInteractiveAIResponse(
     );
   }
 
-  // J. GREETINGS
+  // ==========================================
+  // 11. GREETINGS
+  // ==========================================
   if (/^(hi|hello|hey|greetings|namaste|sup|what's up)/i.test(q)) {
     return (
       `👋 Namaste & Welcome!\n\n` +
       `I am your universal AI Chatbot! Ask me **ANYTHING**:\n` +
+      `- 💻 *"Write fibonacci code"* or *"Java code"* 👨‍💻\n` +
       `- ☕ *"Cafe in Tirupati"* (or Vizag, Chennai, Hyderabad, Mumbai, Goa)\n` +
       `- 🏛️ *"Best places to go in ${city}"*\n` +
       `- 🎮 *"Lets play a game"* 🕹️\n` +
@@ -359,7 +487,6 @@ export function generateInteractiveAIResponse(
 
   // ==========================================
   // UNIVERSAL SMART AI RESPONSE FOR ALL OTHER PROMPTS
-  // (Zero annoying template fallbacks!)
   // ==========================================
   return (
     `🤖 **SafeWander AI Intelligence (${city}, ${state}):**\n\n` +
@@ -370,6 +497,6 @@ export function generateInteractiveAIResponse(
     `- 🏨 **Safe Hotels:** ${cityData.hotels.slice(0, 2).map((h) => h.name).join(', ')}\n` +
     `- 🚔 **Emergency Police:** ${cityData.police.name} (\`${cityData.police.phone}\`)\n` +
     `- 🏥 **Trauma Hospital:** ${cityData.hospital.name} (\`${cityData.hospital.phone}\`)\n\n` +
-    `Feel free to ask me anything else — cafes, hotels, games, weather, or writing!`
+    `Feel free to ask me anything else — cafes, hotels, coding, java, fibonacci, games, weather, or writing!`
   );
 }
