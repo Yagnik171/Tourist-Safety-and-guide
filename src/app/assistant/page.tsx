@@ -62,7 +62,7 @@ export default function AssistantPage() {
     {
       id: '0',
       role: 'assistant',
-      text: `👋 Hello! I am **SafeWander AI Agent**, your interactive travel & safety companion for **${currentLocation.city}, ${currentLocation.state || 'India'}**.\n\nI can converse with you like **ChatGPT & Gemini** to plan itineraries, find safe hotels, suggest food spots, or dispatch emergency assistance.\n\n🎙️ *Click the Microphone button to talk to me via voice!*`,
+      text: `👋 Hello! I am **SafeWander AI Agent**, your travel & AI companion for **${currentLocation.city}, ${currentLocation.state || 'India'}**.\n\nYou can ask me **ANYTHING** in chat — weather updates, boredom fixes, stories, jokes, 3-day trip itineraries, safe hotels, or emergency responder contacts.\n\n💡 *Voice chat is optional — click the 🎙️ mic button to speak or tap 🔊 Speak on any message to listen out loud!*`,
       timestamp: new Date(),
       modelUsed: 'Gemini 1.5 Flash',
     },
@@ -71,7 +71,7 @@ export default function AssistantPage() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  const [isVoiceOutputEnabled, setIsVoiceOutputEnabled] = useState(true);
+  const [isVoiceOutputEnabled, setIsVoiceOutputEnabled] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const bottomRef = useRef<HTMLDivElement>(null);
