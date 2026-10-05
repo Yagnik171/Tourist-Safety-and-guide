@@ -1,6 +1,11 @@
 import { Tabs } from 'expo-router';
-import { View } from 'react-native';
-import { Home, Map, Bot, Bell, ShieldAlert } from 'lucide-react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+type IoniconName = React.ComponentProps<typeof Ionicons>['name'];
+
+function TabIcon({ name, color, size }: { name: IoniconName; color: string; size: number }) {
+  return <Ionicons name={name} size={size} color={color} />;
+}
 
 export default function TabLayout() {
   return (
@@ -21,8 +26,6 @@ export default function TabLayout() {
         },
         headerStyle: {
           backgroundColor: '#0F172A',
-          borderBottomColor: '#1E293B',
-          borderBottomWidth: 1,
         },
         headerTintColor: '#F8FAFC',
         headerTitleStyle: {
@@ -35,7 +38,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Dashboard',
-          tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => <TabIcon name="shield-checkmark" color={color} size={size} />,
           headerTitle: '🛡️ SafeWander',
         }}
       />
@@ -43,7 +46,7 @@ export default function TabLayout() {
         name="map"
         options={{
           title: 'Live Map',
-          tabBarIcon: ({ color, size }) => <Map color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => <TabIcon name="map" color={color} size={size} />,
           headerTitle: '🗺️ Live Safety Map',
         }}
       />
@@ -51,7 +54,7 @@ export default function TabLayout() {
         name="assistant"
         options={{
           title: 'AI Chat',
-          tabBarIcon: ({ color, size }) => <Bot color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => <TabIcon name="chatbubble-ellipses" color={color} size={size} />,
           headerTitle: '🤖 AI Assistant',
         }}
       />
@@ -59,7 +62,7 @@ export default function TabLayout() {
         name="alerts"
         options={{
           title: 'Alerts',
-          tabBarIcon: ({ color, size }) => <Bell color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => <TabIcon name="notifications" color={color} size={size} />,
           headerTitle: '📡 Safety Alerts',
         }}
       />
@@ -67,7 +70,7 @@ export default function TabLayout() {
         name="emergency"
         options={{
           title: 'Emergency',
-          tabBarIcon: ({ color, size }) => <ShieldAlert color={color} size={20} />,
+          tabBarIcon: ({ color, size }) => <TabIcon name="warning" color={color} size={size} />,
           headerTitle: '🚨 Emergency',
           tabBarActiveTintColor: '#EF4444',
         }}

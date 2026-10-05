@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import MapView, { Marker, Circle, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, Circle } from 'react-native-maps';
 import * as Location from 'expo-location';
-import * as Linking from 'expo-linking';
+import { Linking } from 'react-native';
 
 const SAFETY_COLORS: Record<number, string> = { 90: '#10B981', 80: '#22C55E', 70: '#F59E0B', 0: '#EF4444' };
 
@@ -85,7 +85,6 @@ export default function MapScreen() {
     <SafeAreaView style={styles.container} edges={['bottom']}>
       <MapView
         ref={mapRef}
-        provider={PROVIDER_GOOGLE}
         style={styles.map}
         initialRegion={{
           latitude: 15.0,

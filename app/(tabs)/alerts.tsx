@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Location from 'expo-location';
-import { CloudRain, Wind, Thermometer, ShieldAlert, AlertTriangle, RefreshCw } from 'lucide-react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 interface LiveWeather {
   temperature: number;
@@ -118,7 +118,7 @@ export default function AlertsScreen() {
               <Text style={styles.liveLabel}>LIVE SATELLITE INTEL</Text>
             </View>
             <TouchableOpacity onPress={loadData} disabled={loading}>
-              <RefreshCw color="#0EA5E9" size={16} />
+              <Ionicons name={"refresh" as any} color="#0EA5E9" size={16} />
             </TouchableOpacity>
           </View>
 
@@ -129,19 +129,19 @@ export default function AlertsScreen() {
           ) : weather ? (
             <View style={styles.metricsRow}>
               <View style={styles.metricItem}>
-                <Thermometer color="#EF4444" size={20} />
+                <Ionicons name={"thermometer" as any} color="#EF4444" size={20} />
                 <Text style={styles.metricValue}>{Math.round(weather.temperature)}°C</Text>
                 <Text style={styles.metricTitle}>Temperature</Text>
               </View>
 
               <View style={styles.metricItem}>
-                <Wind color="#0EA5E9" size={20} />
+                <Ionicons name={"speedometer" as any} color="#0EA5E9" size={20} />
                 <Text style={styles.metricValue}>{weather.windspeed} km/h</Text>
                 <Text style={styles.metricTitle}>Wind Velocity</Text>
               </View>
 
               <View style={styles.metricItem}>
-                <CloudRain color="#10B981" size={20} />
+                <Ionicons name={"rainy" as any} color="#10B981" size={20} />
                 <Text style={styles.metricValue}>WMO {weather.weathercode}</Text>
                 <Text style={styles.metricTitle}>Condition</Text>
               </View>
@@ -156,7 +156,7 @@ export default function AlertsScreen() {
           <View key={b.id} style={[styles.bulletinCard, { borderLeftColor: b.color }]}>
             <View style={styles.bulletinTop}>
               <View style={styles.bulletinBadgeRow}>
-                <ShieldAlert color={b.color} size={16} />
+                <Ionicons name={"warning" as any} color={b.color} size={16} />
                 <Text style={[styles.bulletinType, { color: b.color }]}>{b.type.toUpperCase()} ADVISORY</Text>
               </View>
               <View style={[styles.severityPill, { backgroundColor: b.color + '20' }]}>

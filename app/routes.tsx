@@ -3,7 +3,7 @@ import {
   View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ShieldCheck, Zap, Navigation, MapPin, CheckCircle2 } from 'lucide-react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const DEMO_ROUTES = [
   {
@@ -49,7 +49,7 @@ export default function RoutesScreen() {
         {/* Route Planner Card */}
         <View style={styles.inputCard}>
           <View style={styles.inputRow}>
-            <MapPin color="#10B981" size={18} />
+            <Ionicons name={"location" as any} color="#10B981" size={18} />
             <TextInput
               style={styles.textInput}
               value={origin}
@@ -60,7 +60,7 @@ export default function RoutesScreen() {
           </View>
           <View style={styles.divider} />
           <View style={styles.inputRow}>
-            <MapPin color="#EF4444" size={18} />
+            <Ionicons name={"location" as any} color="#EF4444" size={18} />
             <TextInput
               style={styles.textInput}
               value={destination}
@@ -105,7 +105,7 @@ export default function RoutesScreen() {
               <View style={styles.metricsBar}>
                 <Text style={styles.metricText}>📏 {route.distance}</Text>
                 <Text style={styles.metricText}>⏱️ {route.duration}</Text>
-                {isSelected && <CheckCircle2 color={route.color} size={16} />}
+                {isSelected && <Ionicons name={"checkmark-circle" as any} color={route.color} size={16} />}
               </View>
 
               <View style={styles.highlightsContainer}>
@@ -121,7 +121,7 @@ export default function RoutesScreen() {
 
         {/* Start Navigation Button */}
         <TouchableOpacity style={styles.startNavBtn}>
-          <Navigation color="#FFFFFF" size={20} />
+          <Ionicons name={"navigate" as any} color="#FFFFFF" size={20} />
           <Text style={styles.startNavText}>Start Turn-by-Turn Safe Navigation</Text>
         </TouchableOpacity>
 

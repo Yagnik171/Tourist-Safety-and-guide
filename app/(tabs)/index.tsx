@@ -6,7 +6,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
-import { ShieldCheck, Map, Bot, Bell, Phone, Navigation, Star } from 'lucide-react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const SAFETY_DATA: Record<string, { score: number; status: string; color: string }> = {
   'Chennai': { score: 88, status: 'High Safety', color: '#10B981' },
@@ -76,10 +76,10 @@ export default function DashboardScreen() {
   };
 
   const quickActions = [
-    { title: 'Live Map', icon: Map, color: '#0EA5E9', route: '/(tabs)/map' },
-    { title: 'AI Assistant', icon: Bot, color: '#8B5CF6', route: '/(tabs)/assistant' },
-    { title: 'Alerts', icon: Bell, color: '#F59E0B', route: '/(tabs)/alerts' },
-    { title: 'Safe Route', icon: Navigation, color: '#10B981', route: '/routes' },
+    { title: 'Live Map', iconName: 'map', color: '#0EA5E9', route: '/(tabs)/map' },
+    { title: 'AI Assistant', iconName: 'chatbubble-ellipses', color: '#8B5CF6', route: '/(tabs)/assistant' },
+    { title: 'Alerts', iconName: 'notifications', color: '#F59E0B', route: '/(tabs)/alerts' },
+    { title: 'Safe Route', iconName: 'navigate', color: '#10B981', route: '/routes' },
   ];
 
   const recentAlerts = [
@@ -102,7 +102,7 @@ export default function DashboardScreen() {
               <Text style={styles.timeText}>{time}</Text>
             </View>
             <View style={[styles.scoreBadge, { backgroundColor: safetyColor + '20', borderColor: safetyColor }]}>
-              <ShieldCheck color={safetyColor} size={20} />
+              <Ionicons name={"shield-checkmark" as any} color={safetyColor} size={20} />
               <Text style={[styles.scoreText, { color: safetyColor }]}>{safetyScore}</Text>
             </View>
           </View>
@@ -130,7 +130,7 @@ export default function DashboardScreen() {
               style={[styles.quickCard, { borderColor: action.color + '40' }]}
               onPress={() => router.push(action.route as any)}
             >
-              <action.icon color={action.color} size={24} />
+              <Ionicons name={action.iconName as any} color={action.color} size={24} />
               <Text style={[styles.quickLabel, { color: action.color }]}>{action.title}</Text>
             </TouchableOpacity>
           ))}
@@ -156,7 +156,7 @@ export default function DashboardScreen() {
         {Object.entries(SAFETY_DATA).slice(0, 5).map(([c, data]) => (
           <View key={c} style={styles.cityRow}>
             <View style={styles.cityInfo}>
-              <Star color={data.color} size={14} fill={data.color} />
+              <Ionicons name={"star" as any} color={data.color} size={14} />
               <Text style={styles.cityRowName}>{c}</Text>
             </View>
             <View style={[styles.cityScore, { backgroundColor: data.color + '20' }]}>

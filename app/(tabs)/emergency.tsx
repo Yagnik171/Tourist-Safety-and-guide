@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Location from 'expo-location';
-import { Phone, MessageSquare, AlertTriangle, ShieldCheck, MapPin, Hospital, Shield } from 'lucide-react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const EMERGENCY_NUMBER = '7424962369';
 
@@ -75,7 +75,7 @@ export default function EmergencyScreen() {
       <ScrollView contentContainerStyle={styles.scroll}>
         {/* Massive SOS Button */}
         <TouchableOpacity style={styles.sosHuge} onPress={directCall} activeOpacity={0.8}>
-          <AlertTriangle color="#FFFFFF" size={44} />
+          <Ionicons name={"alert-circle" as any} color="#FFFFFF" size={44} />
           <Text style={styles.sosHugeTitle}>SOS EMERGENCY</Text>
           <Text style={styles.sosHugeSub}>TAP TO CALL +91 {EMERGENCY_NUMBER}</Text>
         </TouchableOpacity>
@@ -83,7 +83,7 @@ export default function EmergencyScreen() {
         {/* Live GPS Card */}
         <View style={styles.gpsCard}>
           <View style={styles.gpsHeader}>
-            <MapPin color="#0EA5E9" size={18} />
+            <Ionicons name={"location" as any} color="#0EA5E9" size={18} />
             <Text style={styles.gpsTitle}>CURRENT GPS DISPATCH COORDINATES</Text>
           </View>
           <Text style={styles.gpsCoords}>
@@ -96,7 +96,7 @@ export default function EmergencyScreen() {
         <Text style={styles.sectionTitle}>Instant Dispatch Channels</Text>
 
         <TouchableOpacity style={[styles.channelBtn, { backgroundColor: '#166534' }]} onPress={whatsappSOS}>
-          <MessageSquare color="#FFFFFF" size={20} />
+          <Ionicons name={"chatbubble" as any} color="#FFFFFF" size={20} />
           <View style={{ flex: 1 }}>
             <Text style={styles.channelTitle}>WhatsApp SOS with Live Google Pin</Text>
             <Text style={styles.channelSub}>Sends instant location link to +91 {EMERGENCY_NUMBER}</Text>
@@ -104,7 +104,7 @@ export default function EmergencyScreen() {
         </TouchableOpacity>
 
         <TouchableOpacity style={[styles.channelBtn, { backgroundColor: '#1E293B', borderColor: '#0EA5E9', borderWidth: 1 }]} onPress={sendSMS}>
-          <Phone color="#0EA5E9" size={20} />
+          <Ionicons name={"call" as any} color="#0EA5E9" size={20} />
           <View style={{ flex: 1 }}>
             <Text style={[styles.channelTitle, { color: '#0EA5E9' }]}>Direct SMS Alert</Text>
             <Text style={styles.channelSub}>Broadcasts SMS payload to +91 {EMERGENCY_NUMBER}</Text>
@@ -112,7 +112,7 @@ export default function EmergencyScreen() {
         </TouchableOpacity>
 
         <TouchableOpacity style={[styles.channelBtn, { backgroundColor: '#B91C1C' }]} onPress={call112}>
-          <Shield color="#FFFFFF" size={20} />
+          <Ionicons name={"shield" as any} color="#FFFFFF" size={20} />
           <View style={{ flex: 1 }}>
             <Text style={styles.channelTitle}>Call National Emergency (112)</Text>
             <Text style={styles.channelSub}>Police, Ambulance, and Fire Control</Text>
@@ -124,7 +124,7 @@ export default function EmergencyScreen() {
 
         <View style={styles.helplineList}>
           <TouchableOpacity style={styles.helplineItem} onPress={() => Linking.openURL('tel:100')}>
-            <ShieldCheck color="#0EA5E9" size={20} />
+            <Ionicons name={"shield-checkmark" as any} color="#0EA5E9" size={20} />
             <View style={{ flex: 1 }}>
               <Text style={styles.helplineName}>Police Control Room</Text>
               <Text style={styles.helplineNum}>Dial 100</Text>
@@ -132,7 +132,7 @@ export default function EmergencyScreen() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.helplineItem} onPress={() => Linking.openURL('tel:108')}>
-            <Hospital color="#EF4444" size={20} />
+            <Ionicons name={"medkit" as any} color="#EF4444" size={20} />
             <View style={{ flex: 1 }}>
               <Text style={styles.helplineName}>24/7 Ambulance Dispatch</Text>
               <Text style={styles.helplineNum}>Dial 108</Text>
@@ -140,7 +140,7 @@ export default function EmergencyScreen() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.helplineItem} onPress={() => Linking.openURL('tel:1091')}>
-            <ShieldCheck color="#EC4899" size={20} />
+            <Ionicons name={"shield-checkmark" as any} color="#EC4899" size={20} />
             <View style={{ flex: 1 }}>
               <Text style={styles.helplineName}>Women Helpline</Text>
               <Text style={styles.helplineNum}>Dial 1091</Text>
@@ -148,7 +148,7 @@ export default function EmergencyScreen() {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.helplineItem} onPress={() => Linking.openURL('tel:1363')}>
-            <ShieldCheck color="#F59E0B" size={20} />
+            <Ionicons name={"shield-checkmark" as any} color="#F59E0B" size={20} />
             <View style={{ flex: 1 }}>
               <Text style={styles.helplineName}>Tourist Helpline India</Text>
               <Text style={styles.helplineNum}>Dial 1363</Text>
