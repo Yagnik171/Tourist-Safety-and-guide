@@ -140,6 +140,9 @@ export default function MapScreen() {
           padding: 4px 8px; border-radius: 6px; font-weight: bold; font-size: 11px;
           text-align: center; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
+        .leaflet-tile-pane {
+          filter: brightness(0.65) invert(1) contrast(2.6) hue-rotate(200deg) saturate(0.35);
+        }
       </style>
     </head>
     <body>
@@ -149,10 +152,9 @@ export default function MapScreen() {
         var initialLng = ${userLocation ? userLocation.lng : 79.0};
         var map = L.map('map', { zoomControl: false }).setView([initialLat, initialLng], ${userLocation ? 10 : 5});
 
-        // Dark theme OpenStreetMap tiles via CartoDB Dark Matter
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-          subdomains: 'abcd',
+        // Official OpenStreetMap tiles (100% free, zero watermark, zero API key)
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors',
           maxZoom: 19
         }).addTo(map);
 
